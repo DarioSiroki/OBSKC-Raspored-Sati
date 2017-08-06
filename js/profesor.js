@@ -88,7 +88,12 @@ function profesor (){
 
 					   			}
 										document.getElementById('pet').innerHTML=text; 	
-										document.getElementById("collapse1").className+=" in";	
+										document.getElementById("collapse1").className="panel-collapse collapse in";
+										document.getElementById("collapse1").style.height="";
+										document.getElementById("collapse2").className="panel-collapse collapse";
+										document.getElementById("collapse3").className="panel-collapse collapse";
+										document.getElementById("collapse4").className="panel-collapse collapse";
+										document.getElementById("collapse5").className="panel-collapse collapse";
 					   			}
 				}
 			}
