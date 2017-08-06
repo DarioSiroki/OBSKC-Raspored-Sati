@@ -7,6 +7,7 @@
     url: "js/data.json",
     dataType: "json",
     success: function(out) {
+    	// jsondata = polje profesora za autocomplete
         jsondata = $.map(out, function(item) {
             return {
                 label: item[0]
@@ -15,7 +16,7 @@
 
         jsondata.shift();
         jsondata.shift();
-            // autocomplete
+            // Autocomplete
         $("#tags").autocomplete({
             delay: 0,
             source: jsondata,
@@ -23,7 +24,7 @@
         });
 
 
-//                      Input iz trazilice koji se sprema u varijablu input
+//                      Input iz trazilice koji se sprema u varijablu input i poziva getRaspored funkciju
     window.onkeyup = keyup;
     var input;
     function keyup(e) {
