@@ -1,12 +1,15 @@
-
+function profesor (){
 
 //                      Jquery ajax za povlacenje json datoteke
 
 
     $.ajax({
-    url: "js/data.json",
+    url: smjena,
     dataType: "json",
     success: function(out) {
+    	   	// Datum rasporeda
+    	document.getElementById("datum").innerHTML=out[0][0];
+
     	// jsondata = polje profesora za autocomplete
         jsondata = $.map(out, function(item) {
             return {
@@ -84,7 +87,8 @@
 		   				
 
 					   			}
-										document.getElementById('pet').innerHTML=text; 		
+										document.getElementById('pet').innerHTML=text; 	
+										document.getElementById("collapse1").className+=" in";	
 					   			}
 				}
 			}
@@ -93,4 +97,4 @@
 							
 							
 
-}});
+}});}

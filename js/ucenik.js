@@ -1,12 +1,15 @@
-
+function ucenik(){
 
 //                      Jquery ajax za povlacenje json datoteke
 
 
     $.ajax({
-    url: "js/data.json",
+    url: smjena,
     dataType: "json",
     success: function(data) {
+   	// Datum rasporeda
+    	document.getElementById("datum").innerHTML=data[0][0];
+
     	//Arr = raspored bez imena profesora
         		var arr = [];
 		   			for (var x = 2; x < data.length; x++){
@@ -36,14 +39,14 @@
       input = e.target.value;
       getRaspored();
     }
-
+	
  //						Prikazivanje rasporeda
 
 
  			function getRaspored()
  			{
 				for (var i = razredi.length - 1; i >= 0; i--) // Loopanje kroz ucenike
-				{					   				
+				{if (input!=="") { // Fixanje buga zbog kojeg su se petlje vrtile dok nije bilo inputa 		   				
 					   		if(input==razredi[i]) //Ako je razred unesen prikazi raspored (i isfiltriraj prije)
 					   			{
 					   			// Ponedjeljak
@@ -171,8 +174,9 @@
 		   						text+="</td></tr>";
 		   					}
 										document.getElementById('pet').innerHTML=text;
+										document.getElementById("collapse1").className+=" in";
 					   			
-								}
+								}}
 							}
 						}
 
@@ -180,4 +184,4 @@
 							
 							
 
-}});
+}});}

@@ -16,8 +16,15 @@
 <body class="container">
 
 
+<div style="text-align: center;">
+	<h1 class="jumbotron"> Profesor </h1>
+    <p>Odaberite smjenu</p>  
+      <button onclick='smjena="js/A.json";profesor();' type="button" class="btn btn-default">A smjena</button> 
+      <button onclick='smjena="js/B.json";profesor();' type="button" class="btn btn-default">B smjena</button>
+      <br> <br>
+        <p id="datum"></p>
+</div>
 
-	<h1 class="jumbotron" style="text-align: center;"> Profesor </h1>
 
 		      <div class="input-group">
 			  	<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
@@ -32,7 +39,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" href="#collapse1">Ponedjeljak</a>
+          <a data-toggle="collapse" data-parent="#accordion"href="#collapse1">Ponedjeljak</a>
         </h4>
       </div>
       <div id="collapse1" class="panel-collapse collapse">
@@ -61,7 +68,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" href="#collapse2">Utorak</a>
+          <a data-toggle="collapse" data-parent="#accordion"href="#collapse2">Utorak</a>
         </h4>
       </div>
       <div id="collapse2" class="panel-collapse collapse">
@@ -90,7 +97,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse"  href="#collapse3">Srijeda</a>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Srijeda</a>
         </h4>
       </div>
       <div id="collapse3" class="panel-collapse collapse">
@@ -119,7 +126,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse"  href="#collapse4">Četvrtak</a>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Četvrtak</a>
         </h4>
       </div>
       <div id="collapse4" class="panel-collapse collapse">
@@ -148,7 +155,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse"  href="#collapse5">Petak</a>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">Petak</a>
         </h4>
       </div>
       <div id="collapse5" class="panel-collapse collapse">
