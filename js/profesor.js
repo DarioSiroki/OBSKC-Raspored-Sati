@@ -8,7 +8,7 @@ function profesor (){
     dataType: "json",
     success: function(out) {
     	   	// Datum rasporeda
-    	document.getElementById("datum").innerHTML=out[0][0];
+    	document.getElementById("datum").innerHTML="Raspored za: " + out[0][0];
 
     	// jsondata = polje profesora za autocomplete
         jsondata = $.map(out, function(item) {

@@ -8,7 +8,7 @@ function ucenik(){
     dataType: "json",
     success: function(data) {
    	// Datum rasporeda
-    	document.getElementById("datum").innerHTML=data[0][0];
+    	document.getElementById("datum").innerHTML="Raspored za: " + data[0][0];
 
     	//Arr = raspored bez imena profesora
         		var arr = [];
