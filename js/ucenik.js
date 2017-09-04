@@ -186,14 +186,17 @@ if (exeCookie) {getRaspored();}
 		   						text+="</td></tr>";
 		   					}
 										document.getElementById('pet').innerHTML=text; 	
-										document.getElementById("collapse1").className="panel-collapse collapse in";
-										document.getElementById("collapse1").style.height="";
-										document.getElementById("collapse2").className="panel-collapse collapse";
-										document.getElementById("collapse3").className="panel-collapse collapse";
-										document.getElementById("collapse4").className="panel-collapse collapse";
-										document.getElementById("collapse5").className="panel-collapse collapse";
-					   					document.activeElement.blur();
-					   					document.getElementById("datum").innerHTML="Raspored za: " + data[0][0]+", razred:"+input;
+										
+										document.getElementById("Mon").className="panel-collapse collapse in";
+										document.getElementById("Mon").style.height="";
+										document.getElementById("Tue").className="panel-collapse collapse";
+										document.getElementById("Wed").className="panel-collapse collapse";
+										document.getElementById("Thu").className="panel-collapse collapse";
+										document.getElementById("Fri").className="panel-collapse collapse";
+					   					document.activeElement.blur(); // Fix za bug tipkovnice koja ostane otvorena
+					   					document.getElementById("datum").innerHTML="Raspored za: " + data[0][0]+", razred:"+input;// Prikaze raspored uz datum, update
+					   					document.getElementById("zapamti").style.visibility="visible";
+					   					document.getElementById("ocisti").style.visibility="visible";
 								}}
 							}
 						}
