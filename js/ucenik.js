@@ -1,3 +1,15 @@
+if (readCookie("input")!="") {ifCookieExists();} //Ako postoji kolacic otvori raspored
+
+var input;
+var exeCookie;
+
+function ifCookieExists(){
+	input = readCookie("input");
+	smjena = readCookie("smjena");
+	ucenik();
+	exeCookie=1;
+}
+
 function ucenik(){
 
 //                      Jquery ajax za povlacenje json datoteke
@@ -34,14 +46,14 @@ function ucenik(){
 
 //                      Input iz trazilice koji se sprema u varijablu input i poziva getRaspored funkciju
     window.onkeyup = keyup;
-    var input;
     function keyup(e) {
-      input = e.target.value;
+      input = e.target.value.toUpperCase();
       getRaspored();
     }
-	
+
  //						Prikazivanje rasporeda
 
+if (exeCookie) {getRaspored();}
 
  			function getRaspored()
  			{
@@ -180,7 +192,8 @@ function ucenik(){
 										document.getElementById("collapse3").className="panel-collapse collapse";
 										document.getElementById("collapse4").className="panel-collapse collapse";
 										document.getElementById("collapse5").className="panel-collapse collapse";
-					   			
+					   					document.activeElement.blur();
+					   					document.getElementById("datum").innerHTML="Raspored za: " + data[0][0]+", razred:"+input;
 								}}
 							}
 						}
