@@ -19,8 +19,8 @@
       <button onclick='smjena="js/A.json";ucenik();' type="button" class="btn btn-default">A smjena</button> 
       <button onclick='smjena="js/B.json";ucenik();' type="button" class="btn btn-default">B smjena</button>
       <br> <br>
-      <button onclick='cookies()' type="button" class="btn btn-default">Zapamti odabir</button>
-      <button onclick='clearCookies()' type="button" class="btn btn-default">Očisti odabir</button>
+      <button id="zapamti" style="visibility: hidden;" onclick='cookies()' type="button" class="btn btn-default">Zapamti odabir</button>
+      <button id="ocisti" style="visibility: hidden;" onclick='clearCookies()' type="button" class="btn btn-default">Očisti odabir</button>
       <br> <br>
         <p id="datum"></p>
 </div>
@@ -38,10 +38,10 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Ponedjeljak</a>
+          <a data-toggle="collapse" data-parent="#accordion" href="#Mon">Ponedjeljak</a>
         </h4>
       </div>
-      <div id="collapse1" class="panel-collapse collapse">
+      <div id="Mon" class="panel-collapse collapse">
         <div class="panel-body">
 <table class="table" id="pon">
 
@@ -53,10 +53,10 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Utorak</a>
+          <a data-toggle="collapse" data-parent="#accordion" href="#Tue">Utorak</a>
         </h4>
       </div>
-      <div id="collapse2" class="panel-collapse collapse">
+      <div id="Tue" class="panel-collapse collapse">
         <div class="panel-body">
 <table class="table" id="uto">
 
@@ -68,10 +68,10 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Srijeda</a>
+          <a data-toggle="collapse" data-parent="#accordion" href="#Wed">Srijeda</a>
         </h4>
       </div>
-      <div id="collapse3" class="panel-collapse collapse">
+      <div id="Wed" class="panel-collapse collapse">
         <div class="panel-body">
 <table class="table" id="sri">
 
@@ -83,10 +83,10 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Četvrtak</a>
+          <a data-toggle="collapse" data-parent="#accordion" href="#Thu">Četvrtak</a>
         </h4>
       </div>
-      <div id="collapse4" class="panel-collapse collapse">
+      <div id="Thu" class="panel-collapse collapse">
         <div class="panel-body">
 <table class="table" id="cet">
 
@@ -98,10 +98,10 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">Petak</a>
+          <a data-toggle="collapse" data-parent="#accordion" href="#Fri">Petak</a>
         </h4>
       </div>
-      <div id="collapse5" class="panel-collapse collapse">
+      <div id="Fri" class="panel-collapse collapse">
         <div class="panel-body">
 <table class="table" id="pet">
 
