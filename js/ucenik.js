@@ -1,7 +1,46 @@
+$( function() {
+$( "#accordion" ).accordion({
+  collapsible:true,
+  active:false,
+  heightStyle: "content"
+})
+});
+
+function Accordion(props){
+	return(
+		<div>
+			<table className="table" id={props.idContent}></table>
+		</div>
+	);
+}
+
+function App(){
+	return (
+	<div id="accordion">
+		<p> Ponedjeljak </p>
+			<Accordion idContent="pon" />
+		<p> Utorak </p>
+			<Accordion idContent="uto" />
+		<p> Srijeda </p>
+			<Accordion idContent="sri" />
+		<p> Cetvrtak </p>
+			<Accordion idContent="cet" />
+		<p> Petak </p>
+			<Accordion idContent="pet" />
+	</div>
+	);
+}
+
+ReactDOM.render(
+  <App/>,
+  document.getElementById('react-accordion')
+);
+
 if (readCookie("input")!="") {ifCookieExists();} //Ako postoji kolacic otvori raspored
 
 var input;
 var exeCookie;
+var smjena;
 
 function ifCookieExists(){
 	input = readCookie("input");
@@ -13,8 +52,6 @@ function ifCookieExists(){
 function ucenik(){
 
 //                      Jquery ajax za povlacenje json datoteke
-
-
     $.ajax({
     url: smjena,
     dataType: "json",
@@ -52,7 +89,6 @@ function ucenik(){
     }
 
  //						Prikazivanje rasporeda
-
 if (exeCookie) {getRaspored();}
 
  			function getRaspored()
@@ -186,13 +222,14 @@ if (exeCookie) {getRaspored();}
 		   						text+="</td></tr>";
 		   					}
 										document.getElementById('pet').innerHTML=text; 	
-										
-										document.getElementById("Mon").className="panel-collapse collapse in";
-										document.getElementById("Mon").style.height="";
-										document.getElementById("Tue").className="panel-collapse collapse";
-										document.getElementById("Wed").className="panel-collapse collapse";
-										document.getElementById("Thu").className="panel-collapse collapse";
-										document.getElementById("Fri").className="panel-collapse collapse";
+								
+						// Nakon dohvacanja fixevi		
+						var d = new Date();
+						var n = d.getDay();
+						if(n>5){n=1}
+							$( "#accordion" ).accordion({
+							  active:n-1, //Otvori tab koji je dan
+							})
 					   					document.activeElement.blur(); // Fix za bug tipkovnice koja ostane otvorena
 					   					document.getElementById("datum").innerHTML="Raspored za: " + data[0][0]+", razred:"+input;// Prikaze raspored uz datum, update
 					   					document.getElementById("zapamti").style.visibility="visible";

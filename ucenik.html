@@ -7,15 +7,25 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/jquery-ui.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Skripte -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-105329146-1', 'auto');ga('send', 'pageview');</script>
+           <!-- ReactJS -->
+  <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+          <!-- jquery/boostrap -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-ui.js"></script>
 
 </head>
 
-
 <body class="container">
-
-
 <div style="text-align: center;">
 	<h1 class="jumbotron"> Učenik </h1>
+
+      <!-- Odabir smjene i kolacica -->
       <button onclick='smjena="js/A.json";ucenik();' type="button" class="btn btn-default">A smjena</button> 
       <button onclick='smjena="js/B.json";ucenik();' type="button" class="btn btn-default">B smjena</button>
       <br> <br>
@@ -25,7 +35,7 @@
         <p id="datum"></p>
 </div>
 
-
+          <!-- Search -->
 		      <div class="input-group">
 			  	<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
 			      <input class="form-control" id="tags" placeholder="Razred">
@@ -34,90 +44,13 @@
 
 <br>
 
-  <div class="panel-group" id="accordion">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#Mon">Ponedjeljak</a>
-        </h4>
-      </div>
-      <div id="Mon" class="panel-collapse collapse">
-        <div class="panel-body">
-<table class="table" id="pon">
+  <div id="react-accordion"> </div>  <!-- React+jQuery UI accordion -->
 
 
-</table>
-        </div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#Tue">Utorak</a>
-        </h4>
-      </div>
-      <div id="Tue" class="panel-collapse collapse">
-        <div class="panel-body">
-<table class="table" id="uto">
+           <!-- custom skripte -->
+  <script src="js/ucenikCookies.js"></script> <!-- Kolacici -->
+  <script type="text/babel" src="js/ucenik.js"></script> <!-- Dohvacanje rasporeda -->
 
-
-</table>
-        </div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#Wed">Srijeda</a>
-        </h4>
-      </div>
-      <div id="Wed" class="panel-collapse collapse">
-        <div class="panel-body">
-<table class="table" id="sri">
-
-
-</table>
-        </div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#Thu">Četvrtak</a>
-        </h4>
-      </div>
-      <div id="Thu" class="panel-collapse collapse">
-        <div class="panel-body">
-<table class="table" id="cet">
-
-
-</table>
-        </div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#Fri">Petak</a>
-        </h4>
-      </div>
-      <div id="Fri" class="panel-collapse collapse">
-        <div class="panel-body">
-<table class="table" id="pet">
-
-
-</table>
-        </div>
-      </div>
-    </div>    
-  </div> 
-
-  <!-- Skripte -->
-  <script src="js/ucenikCookies.js"></script>
-  <script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery-ui.js"></script>
-  <script src="js/ucenik.js"></script>
 
 
 
