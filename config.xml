@@ -14,7 +14,7 @@
 	  Dario Široki
 	</author>
 	
-	<access origin="http://ss-obrtnicka-koprivnica.skole.hr/" subdomains="true" />
+	<access origin="*" subdomains="true" />
 
 	 <icon src="icon.png" />
 </widget>
