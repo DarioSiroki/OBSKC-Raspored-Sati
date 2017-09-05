@@ -3,6 +3,7 @@
 <head>
 	<link rel="shortcut icon" href="icon.png" />
 	<meta charset="UTF-8">
+  <meta name="description" content="">
 	<title>Obrtnička škola Koprivnica - Raspored sati</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/jquery-ui.css">
@@ -29,8 +30,8 @@
       <button onclick='smjena="js/A.json";ucenik();' type="button" class="btn btn-default">A smjena</button> 
       <button onclick='smjena="js/B.json";ucenik();' type="button" class="btn btn-default">B smjena</button>
       <br> <br>
-      <button id="zapamti" style="visibility: hidden;" onclick='cookies()' type="button" class="btn btn-default">Zapamti odabir</button>
-      <button id="ocisti" style="visibility: hidden;" onclick='clearCookies()' type="button" class="btn btn-default">Očisti odabir</button>
+      <button id="zapamti" style="visibility: hidden;" onclick='cookies();' type="button" class="btn btn-default">Zapamti odabir</button>
+      <button id="ocisti" style="visibility: hidden;" onclick='clearCookies();alert("Zapamćeni odabir je očišćen");' type="button" class="btn btn-default">Očisti odabir</button>
       <br> <br>
         <p id="datum"></p>
 </div>

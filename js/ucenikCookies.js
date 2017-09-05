@@ -15,12 +15,12 @@ function cookies() {
   var x = readCookie("input");
   var y = readCookie("smjena");
   if (x == "" || y == "") {alert("Prvo odaberi smjenu i razred");}
-    console.log(document.cookie);
+    //console.log(document.cookie);
 }
 
 function clearCookies() {
 	document.cookie = "input=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 	document.cookie = "smjena=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-		console.log(document.cookie);
+		//console.log(document.cookie);
 }
 
