@@ -226,7 +226,7 @@ for (var i = razredi.length - 1; i >= 0; i--) // Loopanje kroz ucenike
 		// Nakon dohvacanja fixevi		
 		var d = new Date();
 		var n = d.getDay();
-		if(n>5){n=1}
+		if(n>5 || n==0){n=1}
 			$( "#accordion" ).accordion({
 			  active:n-1, //Otvori tab koji je dan
 			})
