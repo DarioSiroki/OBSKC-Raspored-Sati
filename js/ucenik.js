@@ -1,11 +1,4 @@
-$( function() {
-$( "#accordion" ).accordion({
-  collapsible:true,
-  active:false,
-  heightStyle: "content"
-})
-});
-
+// MAGIJA
 function Accordion(props){
 	return(
 		<div>
@@ -35,6 +28,12 @@ ReactDOM.render(
   <App/>,
   document.getElementById('react-accordion')
 );
+
+$( "#accordion" ).accordion({
+  collapsible:true,
+  active:false,
+  heightStyle: "content"
+})
 
 if (readCookie("input")!="") {ifCookieExists();} //Ako postoji kolacic otvori raspored
 
@@ -82,17 +81,25 @@ function ucenik(){
 
 
 //                      Input iz trazilice koji se sprema u varijablu input i poziva getRaspored funkciju
-    window.onkeyup = keyup;
-    function keyup(e) {
-      input = e.target.value.toUpperCase();
-      getRaspored();
-    }
+window.onkeyup = keyup;
+function keyup(e) {
+  input = e.target.value.toUpperCase();
+  getRaspored();
+}
 
  //						Prikazivanje rasporeda
 if (exeCookie) {getRaspored();}
 
+
+
 function getRaspored()
 {
+
+var trajanjeU = ["7.45-8.30","8.35-9.20","9.25-10.10","10.25-11.10","11.15-12.00","12.05-12.50","12.55-13.40"];
+var trajanjeP = ["13.45-14.30","14.35-15.20","15.25-16.10","16.25-17.10","17.15-18.00","18.05-18.50","18.55-19.40"];
+var trajanje;
+if (smjena=="js/A.json") {trajanje=trajanjeU;} else {trajanje=trajanjeP;}
+// U ovom dijelu koda smo samo bog i ja znali kaj delam, sad zna samo on jer ja sam zaboravil
 for (var i = razredi.length - 1; i >= 0; i--) // Loopanje kroz ucenike
 {if (input!=="") { // Fixanje buga zbog kojeg su se petlje vrtile dok nije bilo inputa 		   				
 	   		if(input==razredi[i]) //Ako je razred unesen prikazi raspored (i isfiltriraj prije)
@@ -102,7 +109,7 @@ for (var i = razredi.length - 1; i >= 0; i--) // Loopanje kroz ucenike
 	   			for (y = 1; y < 8; y++){ //loopanje kroz stupce
 
 	   			  var provjera = 0;	//varijabla za provjeru dijeli li se razred na grupe
-		   			text+="<th>"+y+"</th>"+"<tr>";
+		   			text+="<th>"+y+".sat"+" ("+trajanje[y-1]+")"+"</th>"+"<tr>";
 		   			for (x = 2; x < data.length; x++){ //loopanje kroz redove		   				
 		   				
 		   				if(data[x][y]==razredi[i]) //ako je pronadjen raz 
@@ -127,7 +134,7 @@ for (var i = razredi.length - 1; i >= 0; i--) // Loopanje kroz ucenike
 	   			for (y = 8; y < 15; y++){ //loopanje kroz stupce
 
 	   			  var provjera = 0;	//varijabla za provjeru dijeli li se razred na grupe
-		   			text+="<th>"+(y-7)+"</th>"+"<tr>";
+		   			text+="<th>"+(y-7)+".sat"+" ("+trajanje[y-8]+")"+"</th>"+"<tr>";
 		   			for (x = 2; x < data.length; x++){ //loopanje kroz redove		   				
 		   				
 		   				if(data[x][y]==razredi[i]) //ako je pronadjen raz 
@@ -152,7 +159,7 @@ for (var i = razredi.length - 1; i >= 0; i--) // Loopanje kroz ucenike
 	   			for (y = 15; y < 22; y++){ //loopanje kroz stupce
 
 	   			  var provjera = 0;	//varijabla za provjeru dijeli li se razred na grupe
-		   			text+="<th>"+(y-14)+"</th>"+"<tr>";
+		   			text+="<th>"+(y-14)+".sat"+" ("+trajanje[y-15]+")"+"</th>"+"<tr>";
 		   			for (x = 2; x < data.length; x++){ //loopanje kroz redove		   				
 		   				
 		   				if(data[x][y]==razredi[i]) //ako je pronadjen raz 
@@ -177,7 +184,7 @@ for (var i = razredi.length - 1; i >= 0; i--) // Loopanje kroz ucenike
 	   			for (y = 22; y < 29; y++){ //loopanje kroz stupce
 
 	   			  var provjera = 0;	//varijabla za provjeru dijeli li se razred na grupe
-		   			text+="<th>"+(y-21)+"</th>"+"<tr>";
+		   			text+="<th>"+(y-21)+".sat"+" ("+trajanje[y-22]+")"+"</th>"+"<tr>";
 		   			for (x = 2; x < data.length; x++){ //loopanje kroz redove		   				
 		   				
 		   				if(data[x][y]==razredi[i]) //ako je pronadjen raz 
@@ -203,7 +210,7 @@ for (var i = razredi.length - 1; i >= 0; i--) // Loopanje kroz ucenike
 	   			for (y = 29; y < 36; y++){ //loopanje kroz stupce
 
 	   			  var provjera = 0;	//varijabla za provjeru dijeli li se razred na grupe
-		   			text+="<th>"+(y-28)+"</th>"+"<tr>";
+		   			text+="<th>"+(y-28)+".sat"+" ("+trajanje[y-29]+")"+"</th>"+"<tr>";
 		   			for (x = 2; x < data.length; x++){ //loopanje kroz redove		   				
 		   				
 		   				if(data[x][y]==razredi[i]) //ako je pronadjen raz 
@@ -243,3 +250,4 @@ for (var i = razredi.length - 1; i >= 0; i--) // Loopanje kroz ucenike
 							
 
 }});}
+/* Za hrabre duse koje su dosle do ovog dijela koda. VI STE IZABRANI. Vi ste tu zbog neceg vise od pustog gledanja na raspored da vidite koje dosadne predmete danas imate. Sretno vam bilo u ovom kodu... */
