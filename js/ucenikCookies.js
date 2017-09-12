@@ -14,6 +14,7 @@ function cookies() {
   document.cookie = "smjena="+smjena+";expires=Wed, 1 Jan 2070 12:00:00 UTC";
   var x = readCookie("input");
   var y = readCookie("smjena");
+  alert("Odabran je "+x+" razred i "+y+" smjena, osvježavanjem stranice ovaj odabir će uvijek biti zapamćen");
   if (x == "" || y == "") {alert("Prvo odaberi smjenu i razred");}
     //console.log(document.cookie);
 }
@@ -21,6 +22,7 @@ function cookies() {
 function clearCookies() {
 	document.cookie = "input=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 	document.cookie = "smjena=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+	alert("Odabir je očišćen");
 		//console.log(document.cookie);
 }
 
