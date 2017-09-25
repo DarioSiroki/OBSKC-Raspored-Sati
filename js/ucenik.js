@@ -46,7 +46,7 @@ function App(){
 			<Accordion idContent="uto" />
 		<p> Srijeda </p>
 			<Accordion idContent="sri" />
-		<p> Cetvrtak </p>
+		<p> Četvrtak </p>
 			<Accordion idContent="cet" />
 		<p> Petak </p>
 			<Accordion idContent="pet" />
