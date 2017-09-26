@@ -29,35 +29,52 @@
 
 
 
-function Accordion(props){
-	return(
-		<div>
-			<table className="table" id={props.idContent}></table>
-		</div>
+function Accordion(props) {
+	return React.createElement(
+		"div",
+		null,
+		React.createElement("table", { className: "table", id: props.idContent })
 	);
 }
 
-function App(){
-	return (
-	<div id="accordion">
-		<p> Ponedjeljak </p>
-			<Accordion idContent="pon" />
-		<p> Utorak </p>
-			<Accordion idContent="uto" />
-		<p> Srijeda </p>
-			<Accordion idContent="sri" />
-		<p> Četvrtak </p>
-			<Accordion idContent="cet" />
-		<p> Petak </p>
-			<Accordion idContent="pet" />
-	</div>
+function App() {
+	return React.createElement(
+		"div",
+		{ id: "accordion" },
+		React.createElement(
+			"p",
+			null,
+			" Ponedjeljak "
+		),
+		React.createElement(Accordion, { idContent: "pon" }),
+		React.createElement(
+			"p",
+			null,
+			" Utorak "
+		),
+		React.createElement(Accordion, { idContent: "uto" }),
+		React.createElement(
+			"p",
+			null,
+			" Srijeda "
+		),
+		React.createElement(Accordion, { idContent: "sri" }),
+		React.createElement(
+			"p",
+			null,
+			" Cetvrtak "
+		),
+		React.createElement(Accordion, { idContent: "cet" }),
+		React.createElement(
+			"p",
+			null,
+			" Petak "
+		),
+		React.createElement(Accordion, { idContent: "pet" })
 	);
 }
 
-ReactDOM.render(
-  <App/>,
-  document.getElementById('react-accordion')
-);
+ReactDOM.render(React.createElement(App, null), document.getElementById('react-accordion'));
 
 $( "#accordion" ).accordion({
   collapsible:true,
