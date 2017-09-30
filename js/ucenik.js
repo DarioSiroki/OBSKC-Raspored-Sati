@@ -62,7 +62,7 @@ function App() {
 		React.createElement(
 			"p",
 			null,
-			" Cetvrtak "
+			" Četvrtak "
 		),
 		React.createElement(Accordion, { idContent: "cet" }),
 		React.createElement(
