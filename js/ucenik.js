@@ -145,7 +145,7 @@ function getRaspored()
 var trajanjeU = ["7.45-8.30","8.35-9.20","9.25-10.10","10.25-11.10","11.15-12.00","12.05-12.50","12.55-13.40"];
 var trajanjeP = ["13.45-14.30","14.35-15.20","15.25-16.10","16.25-17.10","17.15-18.00","18.05-18.50","18.55-19.40"];
 var trajanje;
-if (smjena=="js/B.json") {trajanje=trajanjeU;} else {trajanje=trajanjeP;}
+if (smjena=="js/A.json") {trajanje=trajanjeU;} else {trajanje=trajanjeP;}
 // U ovom dijelu koda smo samo bog i ja znali kaj delam, sad zna samo on jer ja sam zaboravil
 for (var i = razredi.length - 1; i >= 0; i--) // Loopanje kroz ucenike
 {if (input!=="") { // Fixanje buga zbog kojeg su se petlje vrtile dok nije bilo inputa 		   				
