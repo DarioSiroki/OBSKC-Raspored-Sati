@@ -17,7 +17,7 @@ function cookies() {
   var odabir;
   if (x == "" || y == "") {alert("Prvo odaberi smjenu i razred");}
 	else{
-if (y=="js/B.json") {odabir="B"} else {odabir="A"}
+  if (y=="js/B.json") {odabir="B"} else {odabir="A"}
   alert("Odabran je "+x+" razred i "+odabir+" smjena, osvježavanjem stranice ovaj odabir će uvijek biti zapamćen");
 	}
     //console.log(document.cookie);

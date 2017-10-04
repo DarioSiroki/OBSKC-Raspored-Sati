@@ -8,52 +8,62 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/jquery-ui.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Skripte -->
+      <!-- Skripte -->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-105329146-1', 'auto');ga('send', 'pageview');</script>
-           <!-- ReactJS -->
-  <script src="js/react.js"></script>
-  <script src="js/react-dom.js"></script>
-  <script src="js/babel.min.js"></script>
+    <!--<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-105329146-1', 'auto');ga('send', 'pageview');</script>-->
           <!-- jquery/boostrap -->
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/jquery-ui.js"></script>
-
 </head>
-
 <body class="container">
-<div style="text-align: center;">
-	<h1 class="jumbotron"> Učenik </h1>
 
+  <div style="text-align: center;">
+  	<h1 class="jumbotron"> Učenik </h1>
       <!-- Odabir smjene i kolacica -->
-      <button onclick='smjena="js/A.json";ucenik();' type="button" class="btn btn-default">A smjena</button> 
-      <button onclick='smjena="js/B.json";ucenik();' type="button" class="btn btn-default">B smjena</button>
-      <br> <br>
-      <button id="zapamti" style="visibility: hidden;" onclick='cookies();' type="button" class="btn btn-default">Zapamti odabir</button>
-      <button id="ocisti" style="visibility: hidden;" onclick='clearCookies();' type="button" class="btn btn-default">Očisti odabir</button>
-      <br> <br>
-        <p id="datum"></p>
-</div>
+        <button onclick='smjena="js/A.json";ucenik();' type="button" class="btn btn-default">A smjena</button> 
+        <button onclick='smjena="js/B.json";ucenik();' type="button" class="btn btn-default">B smjena</button>
+        <br> <br>
+        <button id="zapamti" style="visibility: hidden;" onclick='cookies();' type="button" class="btn btn-default">Zapamti odabir</button>
+        <button id="ocisti" style="visibility: hidden;" onclick='clearCookies();' type="button" class="btn btn-default">Očisti odabir</button>
+        <br> <br>
+          <p id="datum"></p>
+  </div>
 
-          <!-- Search -->
-		      <div class="input-group">
-			  	<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-			      <input class="form-control" id="tags" placeholder="Razred">
-			  </div>
+      <!-- Search -->
+  <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+    <input class="form-control" id="tags" placeholder="Razred">
+  </div>
+        <br>
 
+      <!-- Accordion -->
+  <div id="accordion">
+    <h3>Ponedjeljak</h3>
+    <div>
+      <table class="table" id="pon"></table>
+    </div>
+      <h3>Utorak</h3>
+    <div>
+      <table class="table" id="uto"></table>
+    </div>
+      <h3>Srijeda</h3>
+    <div>
+      <table class="table" id="sri"></table>
+    </div>
+      <h3>Cetvrtak</h3>
+    <div>
+      <table class="table" id="cet"></table>
+    </div>
+      <h3>Petak</h3>
+    <div>
+      <table class="table" id="pet"></table>
+    </div>
+  </div>
 
-<br>
-
-  <div id="react-accordion"> </div>  <!-- React+jQuery UI accordion -->
-
-
-           <!-- custom skripte -->
-  <script src="js/ucenikCookies.js"></script> <!-- Kolacici -->
-  <script src="js/ucenik.js"></script> <!-- Glavna skripta -->
-
-
-
+             <!-- Skripte -->
+    <script src="js/ucenikCookies.js"></script>
+    <script src="js/ucenik.js"></script>
 
 </body>
 </html>
