@@ -18,27 +18,27 @@ var smjena;
 if (readCookie("input")!="") {ifCookieExists();}
 
 function ucenik(){
-//                      Jquery ajax za povlacenje json datoteke
+// jQuery ajax za povlacenje json datoteke
 	$.ajax({
 	url: smjena,
 	dataType: "json",
 	success: function(data) {
 		var dataL = data.length;
 		document.getElementById("datum").innerHTML="Raspored za: " + data[1][0];// Datum rasporeda
-		//Arr = raspored bez imena profesora
+		// Arr = raspored bez imena profesora
 		var arr = [];
    			for (var x = 3; x < dataL; x++){
 	   			for (var y = 1; y < 36; y++){
 	   				arr.push(data[x][y]);
 				}
 		}			
-			// Brisanje duplikata za autocomplete iz Arr u razredi
+		// Brisanje duplikata za autocomplete iz Arr u razredi
 		var razredi = [];
 			$.each(arr, function(i, el){
 			    if($.inArray(el, razredi) === -1) razredi.push(el);
 			});
 				
-	        // Autocomplete
+	    // Autocomplete
 	    $("#tags").autocomplete({
 	        delay: 0,
 	        source: razredi,
@@ -53,7 +53,7 @@ function ucenik(){
 		  getRaspored();
 		}
 
- //						Prikazivanje rasporeda
+ //	Prikazivanje rasporeda
 		if (exeCookie) {getRaspored();}
 
 		function getRaspored(){
