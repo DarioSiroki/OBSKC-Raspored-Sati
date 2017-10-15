@@ -1,37 +1,148 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<link rel="shortcut icon" href="icon.png" />
-	<meta charset="UTF-8">
-	<meta name="description" content=" obskc raspored sati ucenik / profesor github obrtnicka skola koprivnica">
-	<title>Obrtnička škola Koprivnica - Raspored sati</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body class="container-fluid" style="text-align: center;">
-	<h1 class="jumbotron">
-	<a href="http://ss-obrtnicka-koprivnica.skole.hr/rasporedsati"><img src="icon.png"></a><hr/> Obrtnička škola Koprivnica - raspored sati <i><sup style="color:red;"> BETA </sup></i>
-	</h1>
-	<a href="ucenik.html"><button type="button" class="btn btn-default">Učenik <span class="glyphicon glyphicon-chevron-right"></span></button></a>
-	<a href="profesor.html"><button type="button" class="btn btn-default">Profesor <span class="glyphicon glyphicon-chevron-right"></span></button></a>
-	<br><br>
-	  <div class="panel-group" id="accordion">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" href="#collapse1">Upozorenje!</a>
-        </h4>
-      </div>
-      <div id="collapse1" class="panel-collapse collapse">
-        <div class="panel-body">
-        <p>Zbog nepostojanja savršenog načina za pretvorbu rasporeda iz MS Excel tablice u tablicu oblika koji vidite u ovoj aplikaciji, moguće je da dođe do grešaka. Preporuča se provjera Excel rasporeda sa stranice škole zbog sigurnosti. Ideje za unaprijeđivanje aplikacije, njen izvorni kod i kontaktiranje autora je moguće na <a href="https://github.com/DarioSiroki/OBSKC-Raspored-Sati">GitHubu</a> <br> <br> Autor: Dario Široki</p>
+   <head>
+      <meta charset="UTF-8">
+      <link rel="shortcut icon" href="img/icon.png" />
+      <title> Raspored sati - Obrtnička škola Koprivnica </title>
+      <meta name="description" content=" obskc raspored sati ucenik / profesor github obrtnicka skola koprivnica ">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- skripte, stilovi i fontovi -->
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/jquery-ui.min.css">
+      <link rel="stylesheet" href="css/style.css">
+      <script src="js/jquery.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script src="js/jquery-ui.min.js"></script>
+   </head>
+      <!-- Zaglavlje -->
+   <body class="container">
+      <div class="jumbotron text-center">
+        <div class="row">
+          <div class="col-sm-3">
+            <a href="http://ss-obrtnicka-koprivnica.skole.hr/rasporedsati">
+            <img src="img/icon.png">
+            </a>
+          </div>
+          <div class="col-sm-6">
+            <br>
+            <h2> Raspored sati </h2>
+          </div>
+          <div class="col-sm-3">
+            <br>
+            <span id= "kviz" class="glyphicon glyphicon-cog" data-toggle="modal" data-target="#postavke"> Postavke </span> 
+            <br><br>
+            <span class="glyphicon glyphicon-info-sign" data-toggle="modal" data-target="#informacije"> Info </span>
+          </div>
+        </div>
+        <hr>
+        <p id="info"> Odaberite razred ili profesora u postavkama. </p>
+       </div>
+              <!-- Modal -->
+        <div class="modal fade" id="postavke">
+          <div class="modal-dialog modal-lg">     
+            <!-- Modal sadrzaj-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title text-center">Postavke koje odaberete bit će zapamćene i pri sljedećoj sesiji</h4>
+              </div>
+              <div class="modal-body text-left">
+
+                <p> 1. Jeste li profesor ili učenik?  </p>
+              <form>
+                <div class="checkbox">
+                  <label> <input class="osoba" type='checkbox' value="Učenik"> Učenik </label>
+                </div>
+                <div class="checkbox">
+                  <label> <input class="osoba" type='checkbox' value="Profesor"> Profesor </label>
+                </div>
+              </form>
+
+              <p> 2. Odaberite smjenu </p>
+              <form>
+                <div class="checkbox">
+                  <label> <input class="smjena" type='checkbox' disabled value="js/A.json"> A smjena </label>
+                </div>
+                <div class="checkbox">
+                  <label> <input class="smjena" type='checkbox' disabled value="js/B.json"> B smjena </label>
+                </div>
+                <div class="checkbox">
+                  <label> <input class="" type='checkbox' disabled value="A/B"> Obje smjene (profesori) (uskoro)</label>
+                </div>
+              </form>
+
+              <p> 3.Odaberite razred ili profesora </p>
+               <div class="input-group">
+                 <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                 <input class="form-control" id="tags" placeholder="Razred/profesor" disabled>
+               </div>
+              <br>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal" disabled> Spremi </button>
+                <button id="remember" type="button" class="btn btn-info" data-dismiss="modal" disabled> Spremi i zapamti odabir </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+              <!-- Modal -->
+        <div class="modal fade" id="informacije">
+          <div class="modal-dialog modal-lg">     
+            <!-- Modal sadrzaj-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title text-center"> Informacije </h4>
+              </div>
+              <div class="modal-body text-left">
+                <b> O aplikaciji </b>
+                <p> Više uskoro kad napravim pismeni dio završnog rada. </p>
+                <b> Kada se ažurira raspored? </b>
+                <p> Raspored se ažurira svaki petak ili subotu. </p>
+                <b> Pronašao sam bug/imam prijedlog za unaprijeđenje </b>
+                <p> Pošaljite mi mail na dario.siroki@gmail.com ili napravite pull request na <a href="https://github.com/DarioSiroki/OBSKC-Raspored-Sati"> Githubu. </a> </p>
+                <img src="img/bug.jpg">
+                <br>
+                <b> Aplikacija mi ne radi </b>
+                <p> Pošaljite mail ili se uvjerite da ste u postavkama <b> po redu </b> odabirali opcije i da ste ih <b> ispravno </b> odabrali. </p>
+              <br>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal"> Zatvori </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-<!-- Skripte -->
-    	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-105329146-1', 'auto');ga('send', 'pageview');</script>
-</body>
+        <!-- Accordion -->
+        <div id="accordion">
+          <h3> Ponedjeljak </h3>
+          <div>
+            <table class='table' id="pon"></table>
+          </div>
+          <h3> Utorak </h3>
+          <div>
+            <table class='table' id="uto"></table>
+          </div>
+          <h3> Srijeda </h3>
+          <div>
+            <table class='table' id="sri"></table>
+          </div>
+          <h3> Četvrtak </h3>
+          <div>
+            <table class='table' id="cet"></table>
+          </div>
+          <h3> Petak </h3>
+          <div>
+            <table class='table' id="pet"></table>
+          </div>
+        </div>
+
+        <!-- Skripte -->
+        <script src="js/main.js"></script>
+        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-105329146-1','auto');ga('send','pageview');</script>
+      </div>
+   </body>
 </html>

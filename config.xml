@@ -14,7 +14,7 @@
 	  Dario Široki
 	</author>
 	
-	<access origin="*" subdomains="true" />
+	<access origin="https://github.com" subdomains="true" />
 
 	 <icon src="icon.png" />
 </widget>
