@@ -9,6 +9,17 @@ app za iphone i winse ako ti se da =DDDD
 wiki github / prezentacija ?
 dezurni profesori
 onaj kul templejt s MACovima za telku u hodniku
+
+za filtriranje:
+
+for (let x = 0; x < data.length; x++) {
+  for (let i = 0; i < data[x].length; i++) {
+    if (data[x][i]===0) {
+    data[x][i]="";
+    }
+  }
+}
+
 */
 
 $(document).ready(function() {
@@ -100,7 +111,7 @@ $(document).ready(function() {
         var dataL = data.length;
         filterRazredi();
       } else {
-        //console.log("Smjena nije odabrana");
+        //console.error("Smjena nije odabrana");
       }
     } else if (osoba == "Profesor") {
       if (smjena == "js/A.json") {
@@ -112,13 +123,12 @@ $(document).ready(function() {
         var dataL = data.length;
         filterProfesor();
       } else if (smjena == "Obje smjene (profesori)") {
-        //fetchA();
-        //fetchB();
+        // TODO
       } else {
-        //console.log("Smjena nije odabrana");
+        //console.error("Smjena nije odabrana");
       }
     } else {
-      //console.log("Osoba nije odabrana");
+      //console.error("Osoba nije odabrana");
     }
 
     // Filteri za autocomplete
@@ -157,7 +167,7 @@ $(document).ready(function() {
       data = fetchB();
       dataL = data.length;
     } else {
-      //console.log("Smjena nije odabrana");
+      //console.error("Smjena nije odabrana");
     }
     // Biranje između učenika i profesora
     if (osoba == "Učenik") {
@@ -167,7 +177,7 @@ $(document).ready(function() {
       trajanje();
       getProfesor();
     } else {
-      // console.log("Osoba nije odabrana")
+      // console.error("Osoba nije odabrana");
     }
     // Biranje trajanja bazirano na odabranoj smjeni
     function trajanje() {
