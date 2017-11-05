@@ -156,6 +156,13 @@ $(document).ready(function() {
     }
   }
 
+  // Autocomplete
+  $("#tags").autocomplete({
+    delay: 0,
+    source: ACsrc,
+    minlength: 0
+  });
+  
   // Dohvacanje rasporeda i spremanje u accordion
   function getRaspored() {
     let data, dataL, daniID;
@@ -298,13 +305,6 @@ $(document).ready(function() {
     }
   }
 
-  // Autocomplete
-  $("#tags").autocomplete({
-    delay: 0,
-    source: ACsrc,
-    minlength: 0
-  });
-
   // Modal input
   $(".osoba").click(function() {
     $(".smjena").prop("disabled", false);
@@ -317,9 +317,9 @@ $(document).ready(function() {
     trazilica();
   });
   $("#tags").click(function() {
-    $(".btn").prop("disabled", false);
+    $(".en").prop("disabled", false);
   });
-  $(".btn").click(function() {
+  $(".en").click(function() {
     input = $("#tags")
       .val()
       .toUpperCase();
