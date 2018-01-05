@@ -12,8 +12,8 @@ onaj kul templejt s MACovima za telku u hodniku
 
 za filtriranje:
 
-for (let x = 0; x < data.length; x++) {
-  for (let i = 0; i < data[x].length; i++) {
+for (var x = 0; x < data.length; x++) {
+  for (var i = 0; i < data[x].length; i++) {
     if (data[x][i]===0) {
     data[x][i]="";
     }
@@ -24,8 +24,8 @@ for (let x = 0; x < data.length; x++) {
 
 $(document).ready(function() {
   // Globalne varijable
-  let input, inputNormalCase, smjena, osoba;
-  let ACsrc = [];
+  var input, inputNormalCase, smjena, osoba;
+  var ACsrc = [];
 
   // Accordion postavke
   $("#accordion").accordion({
@@ -73,7 +73,7 @@ $(document).ready(function() {
 
   //Ajax requestovi
   function fetchA() {
-    let result;
+    var result;
     $.ajax({
       url: "js/A.json",
       dataType: "json",
@@ -86,7 +86,7 @@ $(document).ready(function() {
   }
 
   function fetchB() {
-    let result;
+    var result;
     $.ajax({
       url: "js/B.json",
       dataType: "json",
@@ -135,9 +135,9 @@ $(document).ready(function() {
     function filterRazredi() {
       ACsrc.length = 0; // Pražnjenje autocompletea ako postoji
       // Arr = raspored bez imena profesora
-      let arr = [];
-      for (let x = 3; x < dataL; x++) {
-        for (let y = 1; y < 36; y++) {
+      var arr = [];
+      for (var x = 3; x < dataL; x++) {
+        for (var y = 1; y < 36; y++) {
           arr.push(data[x][y]);
         }
       }
@@ -150,7 +150,7 @@ $(document).ready(function() {
     function filterProfesor() {
       ACsrc.length = 0; // Pražnjenje autocompletea ako postoji
       // Vađenje imena profesora iz rasporeda
-      for (let i = 3; i < dataL; i++) {
+      for (var i = 3; i < dataL; i++) {
         ACsrc.push(data[i][0]);
       }
     }
@@ -165,7 +165,7 @@ $(document).ready(function() {
   
   // Dohvacanje rasporeda i spremanje u accordion
   function getRaspored() {
-    let data, dataL, daniID;
+    var data, dataL, daniID;
     // Ajax za raspored
     if (smjena == "js/A.json") {
       data = fetchA();
@@ -189,7 +189,7 @@ $(document).ready(function() {
     // Biranje trajanja bazirano na odabranoj smjeni
     function trajanje() {
       daniID = ["pon", "uto", "sri", "cet", "pet"];
-      let trajanjeU = [
+      var trajanjeU = [
         "7.45-8.30",
         "8.35-9.20",
         "9.25-10.10",
@@ -198,7 +198,7 @@ $(document).ready(function() {
         "12.05-12.50",
         "12.55-13.40"
       ];
-      let trajanjeP = [
+      var trajanjeP = [
         "13.45-14.30",
         "14.35-15.20",
         "15.25-16.10",
@@ -217,13 +217,13 @@ $(document).ready(function() {
     // Filtriranje i punjenje u accordion aka tour-de-france, gl
     // Profesor
     function getProfesor() {
-      let counter = -1;
+      var counter = -1;
       // loop kroz profesore
       for (i = 2; i < dataL; i++) {
         // searcha string umjesto == zbog whitespacea
         if (data[i][0].toUpperCase().search(input) !== -1) {
           // ako je prof pronadjen filtriraj
-          for (let param = 1; param < 36; param += 7) {
+          for (var param = 1; param < 36; param += 7) {
             var text = "";
             for (z = param; z < param + 7; z++) {
               text +=
@@ -251,13 +251,13 @@ $(document).ready(function() {
     // Ucenik
     function getUcenik() {
       // Counter za danID
-      let counter = -1;
+      var counter = -1;
       // Param je varijabla koja se prilagodjava danu
-      for (let param = 1; param < 36; param += 7) {
+      for (var param = 1; param < 36; param += 7) {
         // Filtriranje
-        let text = "";
+        var text = "";
         for (y = param; y < param + 7; y++) {
-          let provjera = 0; //varijabla za provjeru dijeli li se razred na grupe
+          var provjera = 0; //varijabla za provjeru dijeli li se razred na grupe
           text +=
             "<th>" +
             (y - param + 1) +
@@ -293,8 +293,8 @@ $(document).ready(function() {
     function afterFix() {
       document.getElementById("info").innerHTML =
         "Raspored za: <br>" + data[1][0] + ",<br>" + input; // Prikazuje datum rasporeda i odabrani raz/prof
-      let d = new Date();
-      let n = d.getDay();
+      var d = new Date();
+      var n = d.getDay();
       if (n > 5 || n == 0) {
         n = 1;
       }
