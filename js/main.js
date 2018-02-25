@@ -1,27 +1,3 @@
-/*
-TODO lista
-boje s rasporeda
-android toolbar + mozda jos neki korisni plugin za phonegap
-auto update (mozda =)
-push notificationi za novu verziju rasporeda i apdejta appa bi bili bozanski isto ko i offline verzija ili kešanje ty darac
-cordova onrdy 
-app za iphone i winse ako ti se da =DDDD
-wiki github / prezentacija ?
-dezurni profesori
-onaj kul templejt s MACovima za telku u hodniku
-
-za filtriranje:
-
-for (var x = 0; x < data.length; x++) {
-  for (var i = 0; i < data[x].length; i++) {
-    if (data[x][i]===0) {
-    data[x][i]="";
-    }
-  }
-}
-
-*/
-
 $(document).ready(function() {
   // Globalne varijable
   var input, inputNormalCase, smjena, osoba;
