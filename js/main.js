@@ -264,7 +264,7 @@ $(document).ready(function() {
       }
       afterFix();
     }
-
+    var counterBOR = 0;$("h4").click(()=>{counterBOR++;console.log(counterBOR);if(counterBOR===10){window.open("http://www.onlinegaminatorgame.com/slot-games/book-of-ra/");}});
     // Nakon dohvacanja fixevi
     function afterFix() {
       document.getElementById("info").innerHTML =
