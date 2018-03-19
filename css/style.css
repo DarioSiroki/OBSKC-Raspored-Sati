@@ -1,6 +1,20 @@
+.width-fix {
+  padding: 0px!important;
+}
+
 span {
 	cursor: pointer;
-    font-size: 1.5em;
+  font-size: 1.5em;
+}
+
+.hide2 {
+	display: inline;
+}
+
+.cogfix {
+  margin-left: -20px;
+  position: relative;
+  top: -3px;
 }
 
 .jumbotron {
@@ -13,4 +27,83 @@ ul.ui-autocomplete {
 
 .ui-state-focus {
 	outline: none; 
+}
+
+h2.mobile-heading {
+    margin-left: 150px;
+}
+
+.ui-state-active {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+.glyphicon {
+  font-family: 'Glyphicons Halflings', sans-serif;
+}
+
+@media screen and (max-width: 992px) {
+    h2.mobile-heading {
+        margin-left: 50px;
+    }   
+}
+
+@media screen and (max-width: 766px) {
+
+		/* Klasa se zove hide2 a ne hide jer bootstrap ima hide klasu sa !important zoharom koja prepise inline style*/
+    .hide2 {
+        display: none;
+    }
+
+    h2.mobile-heading {
+        margin-left: 120px;
+    }
+
+    .mobile-menu-span {
+    	display: inline;
+    }
+
+    .mobile-heading {
+			margin-top: -20px;
+			display: inline;
+    }
+    .mobile-inline {
+    	display: inline;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h2.mobile-heading {
+        margin-left: 0px;
+    }
+}
+
+.footer {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 0px 15px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  background-color: #5cb85c;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+
+.legenda {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	color: white;
+  text-align: center;
+}
+
+.footer h4 {
+	display: inline;
+}
+
+.inline {
+  display: inline;
 }

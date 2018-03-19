@@ -1,54 +1,58 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <meta charset="UTF-8">
-      <link rel="shortcut icon" href="img/icon.png" />
-      <title> Raspored sati - Obrtnička škola Koprivnica </title>
-      <meta name="description" content=" obskc raspored sati ucenik / profesor github obrtnicka skola koprivnica ">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <!-- skripte, stilovi i fontovi -->
-      <link rel="stylesheet" href="css/bootstrap.min.css">
-      <link rel="stylesheet" href="css/jquery-ui.min.css">
-      <link rel="stylesheet" href="css/style.css">
-      <script src="js/jquery.min.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-      <script src="js/jquery-ui.min.js"></script>
-   </head>
-      <!-- Zaglavlje -->
-   <body class="container">
-      <div class="jumbotron text-center">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="img/icon.png" />
+    <title> Raspored sati - Obrtnička škola Koprivnica </title>
+    <meta name="description" content=" obskc raspored sati ucenik / profesor github obrtnicka skola koprivnica ">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- skripte, stilovi i fontovi -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+  </head>
+  <!-- Zaglavlje -->
+  <body>
+    <div class="container">
+      <div class="jumbotron">
         <div class="row">
-          <div class="col-sm-3">
-            <a href="http://ss-obrtnicka-koprivnica.skole.hr/rasporedsati">
+          <div class="col-sm-3 hide2">
+            <a href="http://ss-obrtnicka-koprivnica.skole.hr/rasporedsati" target="_blank">
             <img src="img/icon.png" alt="OBSKC">
             </a>
           </div>
-          <div class="col-sm-6">
-            <br>
-            <h2> Raspored sati </h2>
+          <div class="col-sm-6 mobile-inline">
+            <br class="hide2">
+            <h2 class="mobile-heading"> Raspored sati </h2>
           </div>
-          <div class="col-sm-3">
-            <br>
-            <span id= "kviz" class="glyphicon glyphicon-cog" data-toggle="modal" data-target="#postavke"> Postavke </span> 
-            <br><br>
-            <span class="glyphicon glyphicon-info-sign" data-toggle="modal" data-target="#informacije"> Info </span>
+          <div class="col-sm-3 mobile-inline">
+            <br class="hide2">
+            <span id= "kviz" class="glyphicon glyphicon-cog mobile-menu-span" data-toggle="modal" data-target="#postavke">
+              <p class="hide2 cogfix">Postavke</p>
+            </span>
+            <br class="hide2"><br class="hide2">
+            <span class="glyphicon glyphicon-info-sign mobile-menu-span" data-toggle="modal" data-target="#informacije">
+              <p class="hide2 cogfix">Informacije</p>
+            </span>
           </div>
         </div>
         <hr>
-        <p id="info"> Odaberite razred ili profesora u postavkama. </p>
-       </div>
-              <!-- Modal -->
-        <div class="modal fade" id="postavke">
-          <div class="modal-dialog modal-lg">     
-            <!-- Modal sadrzaj-->
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title text-center">Postavke koje odaberete bit će zapamćene i pri sljedećoj sesiji</h4>
-              </div>
-              <div class="modal-body text-left">
-
-                <p> 1. Jeste li profesor ili učenik?  </p>
+        <p id="info" class="text-center"> Odaberite razred ili profesora u postavkama. </p>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="postavke">
+        <div class="modal-dialog modal-lg">
+          <!-- Modal sadrzaj-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title text-center">Postavke</h4>
+            </div>
+            <div class="modal-body text-left">
+              <p> 1. Jeste li profesor ili učenik?  </p>
               <form>
                 <div class="radio">
                   <label> <input class="osoba" name="profesor-ucenik" type='radio' value="Učenik"> Učenik </label>
@@ -57,8 +61,7 @@
                   <label> <input class="osoba" name="profesor-ucenik" type='radio' value="Profesor"> Profesor </label>
                 </div>
               </form>
-
-              <p> 2. Odaberite smjenu </p>
+              <p> 2. Odaberite smjenu: </p>
               <form>
                 <div class="radio">
                   <label> <input class="smjena" type='radio' name="smjena" disabled value="js/A.json"> A smjena </label>
@@ -67,80 +70,98 @@
                   <label> <input class="smjena" type='radio' name="smjena" disabled value="js/B.json"> B smjena </label>
                 </div>
                 <div class="radio">
-                  <label> <input class="" type='radio' name="smjena" disabled value="A/B"> Obje smjene (profesori) (uskoro)</label>
+                  <label> <input class="smjena" type='radio' name="smjena" disabled value="A/B"> Obje smjene (profesori) </label>
                 </div>
               </form>
-
-              <p> 3.Odaberite razred ili profesora </p>
-               <div class="input-group">
-                 <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                 <input class="form-control" id="tags" placeholder="Razred/profesor" disabled>
-               </div>
+              <p> 3.Odaberite razred ili profesora: </p>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                <input class="form-control" id="tags" placeholder="Razred/profesor" disabled>
+              </div>
               <br>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-info en" data-dismiss="modal" disabled> Spremi </button>
-                <button id="remember" type="button" class="btn btn-info en" data-dismiss="modal" disabled> Spremi i zapamti odabir </button>
-              </div>
+            </div>
+            <div class="modal-footer">
+              <button id="remember" type="button" class="btn btn-success en" data-dismiss="modal" disabled> Spremi </button>
             </div>
           </div>
         </div>
-
-              <!-- Modal -->
-        <div class="modal fade" id="informacije">
-          <div class="modal-dialog modal-lg">     
-            <!-- Modal sadrzaj-->
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title text-center"> Informacije </h4>
-              </div>
-              <div class="modal-body text-left">
-                <b> O aplikaciji </b>
-                <p> Više uskoro kad napravim pismeni dio završnog rada. </p>
-                <b> Kada se ažurira raspored? </b>
-                <p> Raspored se ažurira svaki petak ili subotu. </p>
-                <b> Pronašao sam bug/imam prijedlog za unaprijeđenje </b>
-                <p> Pošaljite mi mail na dario.siroki@gmail.com ili napravite pull request na <a href="https://github.com/DarioSiroki/OBSKC-Raspored-Sati"> Githubu. </a> </p>
-                <img src="img/bug.jpg" alt="\(>.<)/">
-                <br>
-                <b> Aplikacija mi ne radi </b>
-                <p> Pošaljite mail ili se uvjerite da ste u postavkama <b> po redu </b> odabirali opcije i da ste ih <b> ispravno </b> odabrali. </p>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="informacije">
+        <div class="modal-dialog modal-lg">
+          <!-- Modal sadrzaj-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title text-center"> Informacije </h4>
+            </div>
+            <div class="modal-body text-left">
+              <b> O aplikaciji </b>
+              <p> Više uskoro kad napravim pismeni dio završnog rada. </p>
+              <b> Kada se ažurira raspored? </b>
+              <p> Raspored se ažurira svaki petak ili subotu. </p>
+              <b> Pronašao sam bug/imam prijedlog za unaprijeđenje </b>
+              <p> Pošaljite mi mail na dario.siroki@gmail.com ili napravite pull request na <a href="https://github.com/DarioSiroki/OBSKC-Raspored-Sati"> Githubu. </a> </p>
+              <img src="img/bug.jpg" alt="\(>.<)/">
               <br>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal"> Zatvori </button>
-              </div>
+              <b> Aplikacija mi ne radi </b>
+              <p> Pošaljite mail ili se uvjerite da ste u postavkama <b> po redu </b> odabirali opcije i da ste ih <b> ispravno </b> odabrali. </p>
+              <br>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-dismiss="modal"> Zatvori </button>
             </div>
           </div>
         </div>
-
-        <!-- Accordion -->
-        <div id="accordion">
-          <h3> Ponedjeljak </h3>
-          <div>
-            <table class='table' id="pon"></table>
+      </div>
+      <!-- Accordion -->
+      <div id="accordion">
+        <h3> Ponedjeljak </h3>
+        <div>
+          <table class='table' id="pon"></table>
+        </div>
+        <h3> Utorak </h3>
+        <div>
+          <table class='table' id="uto"></table>
+        </div>
+        <h3> Srijeda </h3>
+        <div>
+          <table class='table' id="sri"></table>
+        </div>
+        <h3> Četvrtak </h3>
+        <div>
+          <table class='table' id="cet"></table>
+        </div>
+        <h3> Petak </h3>
+        <div>
+          <table class='table' id="pet"></table>
+        </div>
+        <h3> Dežurni profesori </h3>
+        <div>
+          <table class='table' id="dezurni"></table>
+        </div>
+      </div>
+      <!-- Footer -->
+      <div class="footer" data-toggle="modal" data-target="#legenda">
+        <h4> Legenda <sub>^</sub></h4>
+      </div>
+      <!-- Modal za footer -->
+      <div class="modal fade" id="legenda">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-body">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <img class="img-responsive" src="img/legenda.png" alt="legenda">
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">Zatvori</button>
           </div>
-          <h3> Utorak </h3>
-          <div>
-            <table class='table' id="uto"></table>
-          </div>
-          <h3> Srijeda </h3>
-          <div>
-            <table class='table' id="sri"></table>
-          </div>
-          <h3> Četvrtak </h3>
-          <div>
-            <table class='table' id="cet"></table>
-          </div>
-          <h3> Petak </h3>
-          <div>
-            <table class='table' id="pet"></table>
           </div>
         </div>
-
-        <!-- Skripte -->
-        <script src="js/main.min.js"></script>
-        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-105329146-1','auto');ga('send','pageview');</script>
-   </body>
+      </div>
+      <!-- Skripte -->
+      <script src="js/main.js"></script>
+      <!-- <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-105329146-1','auto');ga('send','pageview');</script>-->
+    </div>
+  </body>
 </html>
