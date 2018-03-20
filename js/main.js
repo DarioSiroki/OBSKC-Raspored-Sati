@@ -35,17 +35,6 @@ _________  ________   ________    ____  __..___ ___________  _________
  \______  /\_______  /\_______  /|____|__ \|___|/_______  //_______  /
         \/         \/         \/         \/             \/         \/ 
 */
-  // Skripta za citanje kolacica
-  function readCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(";");
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == " ") c = c.substring(1, c.length);
-      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-    }
-    return null;
-  }
 
   // Pohranjivanje kolacica
   function cookies() {
@@ -237,11 +226,9 @@ _____________________    _____   __________.___ .____     .___ _________     ___
   function returnPattern(data) {
     if (typeof data === "object" && data.hasOwnProperty("pattern")) {
       var value =
-        "style=&" +
-        fontColor(data) +
-        "background-image: url('img/" +
+        "background-image: url(&img/" +
         data.pattern +
-        ".png');font-weight:600;font-size: 20px;&";
+        ".png&);font-weight:600;font-size: 20px;";
       value = value.replace(/&/g, '"');
       return value;
     } else {
@@ -252,25 +239,26 @@ _____________________    _____   __________.___ .____     .___ _________     ___
   function returnBgColor(data) {
     if (typeof data === "object" && data.hasOwnProperty("bgColor")) {
       var value =
-        "style=" +
-        fontColor(data) +
-        "'background-color:#" +
+        "background-color:#" +
         data.bgColor +
-        ";font-weight:600;'";
-      value = value.replace(/&/g, '"');
+        ";font-weight:600;";
       return value;
     } else {
       return "";
     }
   }
 
-  function fontColor(data) {
+  function returnFontColor(data) {
     if (typeof data === "object" && data.hasOwnProperty("fontColor")) {
       value = "color:#" + data.fontColor + ";";
       return value;
     } else {
       return "";
     }
+  }
+
+  function returnStyle(data) {
+    return returnPattern(data) + returnBgColor(data) + returnFontColor(data);
   }
 
   function clearDOM() {
@@ -303,10 +291,9 @@ _____________________    _____   __________.___ .____     .___ _________     ___
               trajanje[ii - param] +
               ")</th></tr><tr><td>" +
               (typeof data[i][ii] === "object"
-                ? "<p class='inline' " +
-                  returnBgColor(data[i][ii]) +
-                  returnPattern(data[i][ii]) +
-                  ">" +
+                ? "<p class='inline' style='" +
+                  returnStyle(data[i][ii]) +
+                  "'>" +
                   data[i][ii].name +
                   "</p>"
                 : "") +
@@ -356,10 +343,9 @@ _____________________    _____   __________.___ .____     .___ _________     ___
                     : trajanjeP[iii - param]) +
                   ")</th></tr><tr><td>" +
                   (typeof data[i][ii][iii] === "object"
-                    ? "<p class='inline' " +
-                      returnBgColor(data[i][ii][iii]) +
-                      returnPattern(data[i][ii][iii]) +
-                      ">" +
+                    ? "<p class='inline' style='" +
+                      returnStyle(data[i][ii][iii]) +
+                      "'>" +
                       data[i][ii][iii].name +
                       "</p>"
                     : "") +
@@ -406,10 +392,9 @@ _____________________    _____   __________.___ .____     .___ _________     ___
               text +=
                 "<td>" +
                 (typeof data[x][y] === "object"
-                  ? "<p class='inline' " +
-                    returnBgColor(data[x][y]) +
-                    returnPattern(data[x][y]) +
-                    ">" +
+                  ? "<p class='inline' style='" +
+                    returnStyle(data[x][y]) +
+                    "'>" +
                     data[x][0] +
                     "</p>"
                   : "");
@@ -419,10 +404,9 @@ _____________________    _____   __________.___ .____     .___ _________     ___
               text +=
                 "/" +
                 (typeof data[x][y] === "object"
-                  ? "<p class='inline' " +
-                    returnBgColor(data[x][y]) +
-                    returnPattern(data[x][y]) +
-                    ">" +
+                  ? "<p class='inline' style='" +
+                    returnStyle(data[x][y]) +
+                    "'>" +
                     data[x][0] +
                     "</p>"
                   : "");
