@@ -49,18 +49,15 @@ _________  ________   ________    ____  __..___ ___________  _________
 
   // Pohranjivanje kolacica
   function cookies() {
-    document.cookie =
-      "input=" + input + ";expires=Wed, 1 Jan 2070 12:00:00 UTC";
-    document.cookie =
-      "smjena=" + smjena + ";expires=Wed, 1 Jan 2070 12:00:00 UTC";
-    document.cookie =
-      "osoba=" + osoba + ";expires=Wed, 1 Jan 2070 12:00:00 UTC";
+    window.localStorage.setItem("input", input);
+    window.localStorage.setItem("smjena", smjena);
+    window.localStorage.setItem("osoba", osoba);
   }
 
   // Automatsko izvrsavanje skripte ako postoje kolacici
-  input = readCookie("input");
-  smjena = readCookie("smjena");
-  osoba = readCookie("osoba");
+  input = window.localStorage.getItem("input");
+  smjena = window.localStorage.getItem("smjena");
+  osoba = window.localStorage.getItem("osoba");
   if (input && smjena && osoba !== "") {
     getRaspored();
   }

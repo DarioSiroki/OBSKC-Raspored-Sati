@@ -1,0 +1,17 @@
+{
+  "name": "xlsx2json",
+  "version": "1.0.0",
+  "description": "Pretvaranje xlsx dokumenta u polje podataka koje aplikacija za raspored moze procitati",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dario Široki",
+  "license": "WTFPL",
+  "dependencies": {
+    "chalk": "^2.3.1",
+    "cheerio": "^1.0.0-rc.2",
+    "request": "^2.85.0",
+    "xlsx-style": "^0.8.13"
+  },
+}
