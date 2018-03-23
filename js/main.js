@@ -238,10 +238,7 @@ _____________________    _____   __________.___ .____     .___ _________     ___
 
   function returnBgColor(data) {
     if (typeof data === "object" && data.hasOwnProperty("bgColor")) {
-      var value =
-        "background-color:#" +
-        data.bgColor +
-        ";font-weight:600;";
+      var value = "background-color:#" + data.bgColor + ";font-weight:600;";
       return value;
     } else {
       return "";
@@ -422,33 +419,35 @@ _____________________    _____   __________.___ .____     .___ _________     ___
   }
 
   function dezurni(data) {
-    var DOMvalue = "";
-    if (data.hasOwnProperty("A") && data.hasOwnProperty("B")) {
-      for (var i = 0; i < daniID.length; i++) {
-        DOMvalue +=
-          "<tr><th>" +
-          daniID[i].charAt(0).toUpperCase() +
-          daniID[i].slice(1) +
-          "</tr></th>" +
-          "<tr><td><b>Prijepodne: </b>" +
-          data.A.dezurni[i + 1].name +
-          (window.innerWidth < 500 ? "<br>" : "") +
-          " <b>Poslijepodne: </b>" +
-          data.B.dezurni[i + 1].name +
-          "</tr></td>";
+    try {
+      var DOMvalue = "";
+      if (data.hasOwnProperty("A") && data.hasOwnProperty("B")) {
+        for (var i = 0; i < daniID.length; i++) {
+          DOMvalue +=
+            "<tr><th>" +
+            daniID[i].charAt(0).toUpperCase() +
+            daniID[i].slice(1) +
+            "</tr></th>" +
+            "<tr><td><b>Prijepodne: </b>" +
+            data.A.dezurni[i + 1].name +
+            (window.innerWidth < 500 ? "<br>" : "") +
+            " <b>Poslijepodne: </b>" +
+            data.B.dezurni[i + 1].name +
+            "</tr></td>";
+        }
+      } else {
+        for (var i = 0; i < daniID.length; i++) {
+          DOMvalue +=
+            "<tr><th>" +
+            daniID[i].charAt(0).toUpperCase() +
+            daniID[i].slice(1) +
+            "</tr></th>" +
+            "<tr><td>" +
+            data.dezurni[i + 1].name +
+            "</tr></td>";
+        }
       }
-    } else {
-      for (var i = 0; i < daniID.length; i++) {
-        DOMvalue +=
-          "<tr><th>" +
-          daniID[i].charAt(0).toUpperCase() +
-          daniID[i].slice(1) +
-          "</tr></th>" +
-          "<tr><td>" +
-          data.dezurni[i + 1].name +
-          "</tr></td>";
-      }
-    }
+    } catch (error) {}
     return DOMvalue;
   }
 
