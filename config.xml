@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+	xmlns:gap   = "http://phonegap.com/ns/1.0"
+	id          = "com.obskc.raspored"
+	version     = "1.0.0" >
+
+	<name>Raspored sati</name>
+
+	<description>
+	  Brza i lagana aplikacija jednostavnog sučelja.
+	</description>
+
+	<author href="https://github.com/DarioSiroki/OBSKC-Raspored-Sati" email="dario.siroki@gmail.com">
+	  Dario Široki
+	</author>
+	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
+	<access origin="*" />
+
+	 <icon src="img/icon.png" />
+</widget>
