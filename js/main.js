@@ -1,6 +1,22 @@
 $(document).ready(function() {
-  var input, smjena, osoba;
+  const baseURL = "https://raw.githubusercontent.com/DarioSiroki/OBSKC-Raspored-Sati/master/converter/data/json/";
+  var input, smjena, osoba, verzija;
   var ACsrc = [];
+  getVersion();
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ];
   const daniID = ["pon", "uto", "sri", "cet", "pet"],
     trajanjeU = [
       "7.45-8.30",
@@ -58,35 +74,91 @@ _________  ________   ________    ____  __..___ ___________  _________
 \____|__  /\________|\____|__  //___/\  \
         \/                   \/       \_/
 */
-  function fetchRasp(url) {
+
+
+  function filterVersionsFromJsonAndFillDom(verzije){
+    var datumi = [];
+    var aktivniRaspored = "";
+    for (var i = verzije.length - 1; i >= 0; i--) {
+      datumi.push(verzije[i].substring(0, verzije[i].length - 6));
+    }
+    datumi = datumi.filter(function(item, pos) {
+        return datumi.indexOf(item) == pos;
+    });
+    datumi = datumi.sort(function(a, b) {
+        a = new Date(a);
+        b = new Date(b);
+        return a>b ? -1 : a<b ? 1 : 0;
+    });
+    for (var i = 0; i < datumi.length; i++) {
+      var d = new Date(datumi[i]);
+      var today = new Date();
+      var calc = new Date(datumi[i] + " "  + (1900+today.getYear())).getTime() - (today.getTime() + 259200000);
+      if (calc > 0 && calc < 604800000) {
+        verzija = datumi[i];
+      }
+      $("#datum").append('<option> ' + datumi[i].match(/\d/g).join("") + "." + (d.getMonth()+1) + '. </option>');
+    }
+  }
+
+  // dohvacanje verzija rasporeda
+  function getVersion(){
+    if(window.localStorage.getItem('verzije')){
+      filterVersionsFromJsonAndFillDom(JSON.parse(window.localStorage.getItem("verzije")));
+    } else {
+      $.ajax({
+        url: baseURL+"versions.json",
+        dataType: "json",
+        async: false,
+        success: function(callback) {
+          window.localStorage.setItem("verzije", JSON.stringify(callback));
+          filterVersionsFromJsonAndFillDom(callback);
+        }
+      });
+    }
+  }
+
+  function fetchRasp(smjena) {
     var result;
     // za obje smjene
-    if (url === "A/B") {
+    if (smjena === "A/B") {
       var result = [];
+      if(window.localStorage.getItem(verzija+"A") && window.localStorage.getItem(verzija+"B")) {
+        result[0] = JSON.parse(window.localStorage.getItem(verzija+"A"));
+        result[1] = JSON.parse(window.localStorage.getItem(verzija+"B"));
+        return result;
+      }
       $.ajax({
-        url: "js/A.json",
+        url: baseURL+verzija+"A.json",
         dataType: "json",
         async: false,
         success: function(callback) {
           result[0] = callback;
+          window.localStorage.setItem(verzija+"A", JSON.stringify(callback));
         }
       });
       $.ajax({
-        url: "js/B.json",
+        url: baseURL+verzija+"B.json",
         dataType: "json",
         async: false,
         success: function(callback) {
           result[1] = callback;
+          window.localStorage.setItem(verzija+"B", JSON.stringify(callback));
         }
       });
     } else {
+      if(window.localStorage.getItem(verzija+smjena)) {
+        result = JSON.parse(window.localStorage.getItem(verzija+smjena));
+        return result;
+      }
       // za jednu smjenu
       $.ajax({
-        url: url,
+        url: baseURL+verzija+smjena+".json",
         dataType: "json",
         async: false,
         success: function(callback) {
           result = callback;
+          window.localStorage.setItem(verzija+smjena, JSON.stringify(callback));
         }
       });
     }
@@ -102,6 +174,14 @@ _____________________    _____   __________.___ .____     .___ _________     ___
 */
 
   // Modal input
+  $("select").change(function() {
+    var selected = $("select option:selected").text().split(".") || [];
+    verzija = months[parseInt(selected[1])-1]+selected[0].replace(/ /g,"");
+    console.log(verzija);
+    try {
+      trazilicaData();
+    } catch (error) {}
+  });
   $(".osoba").click(function() {
     $(".smjena").prop("disabled", false);
     osoba = $(".osoba:checked").val() || [];
@@ -141,7 +221,7 @@ _____________________    _____   __________.___ .____     .___ _________     ___
       if ($.inArray(el, ACsrc) === -1) ACsrc.push(el);
     });
     ACsrc = ACsrc.filter(word => word.length < 4);
-    trazilicaIni();
+    trazilicaInit();
   }
 
   function filterProfesor(data, dataL) {
@@ -149,7 +229,7 @@ _____________________    _____   __________.___ .____     .___ _________     ___
     for (var i = 1; i < dataL - 3; i++) {
       ACsrc.push(data[i][0]);
     }
-    trazilicaIni();
+    trazilicaInit();
   }
 
   function filterProfesorAB(data) {
@@ -171,11 +251,11 @@ _____________________    _____   __________.___ .____     .___ _________     ___
         ACsrc.push(arr1[i].replace(/-/g, " "));
       }
     });
-    trazilicaIni();
+    trazilicaInit();
   }
 
   // Autocomplete
-  function trazilicaIni() {
+  function trazilicaInit() {
     $("#tags").autocomplete({
       delay: 0,
       source: function(req, responseFn) {
@@ -489,40 +569,3 @@ _____________________    _____   __________.___ .____     .___ _________     ___
     }
   }
 }); // document onrdy
-
-// Ajax request za raporedima u folderu
-/*var d = new Date();
-var day = d.getUTCDate();
-var month = d.getMonth()+1;
-$.ajax({
-  url: "js",
-  async: false,
-  success: function(data) {
-    // Trazenje aktualnog rasporeda
-    $(data)
-      .find("a:contains(.json)")
-      .each(function() {
-        var filename = decodeURI(
-          this.href
-            .replace(window.location.host, "")
-            .replace(window.location.pathname, "")
-            .replace("http://", "")
-            .replace(".json", "")
-            .replace("smjena", "")
-            .replace("A", "")
-            .replace("B", "")
-        );
-        $("#datumi").append("<li><a href='#'>" + filename + "</li>");
-        filename2 = String(filename.replace(/\D/g, ""));
-        var startDay = parseInt(filename2[0]+filename2[1]);
-        var endDay = parseInt(filename2[4]+filename2[5]);
-        var startMonth = parseInt(filename2[2]+filename2[3]);
-        var endMonth = parseInt(filename2[6]+filename2[7]);
-        if (startMonth>month) {startDay += 31;}
-        if (endMonth>month) {endDay += 31;}
-        if (day>=startDay-1 && day<=endDay+1) {datum += filename;}
-      });
-  }
-});
-
-console.log(datum);*/
