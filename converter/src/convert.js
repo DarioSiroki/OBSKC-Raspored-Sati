@@ -156,7 +156,8 @@ for (let i = 0; i < paths.length; i++) {
 	var info = {
 		smjena: workbook.A1.v.charAt(0),
 		datum: workbook.A2.v,
-		prijeposlije: workbook.A1.v.search("POSLIJE") === -1 ? "PRIJE" : "POSLIJE"
+		prijeposlije: workbook.A1.v.search("POSLIJE") === -1 ? "PRIJE" : "POSLIJE",
+		napomena: ""
 	};
 	final.push(info);
 

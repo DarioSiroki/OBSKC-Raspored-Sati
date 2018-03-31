@@ -1,23 +1,24 @@
 $(document).ready(function() {
-  const baseURL = "https://raw.githubusercontent.com/DarioSiroki/OBSKC-Raspored-Sati/master/converter/data/json/";
+  var baseURL =
+    "https://raw.githubusercontent.com/DarioSiroki/OBSKC-Raspored-Sati/master/converter/data/json/";
   var input, smjena, osoba, verzija;
   var ACsrc = [];
   getVersion();
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
+  var months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
   ];
-  const daniID = ["pon", "uto", "sri", "cet", "pet"],
+  var daniID = ["pon", "uto", "sri", "cet", "pet"],
     trajanjeU = [
       "7.45-8.30",
       "8.35-9.20",
@@ -75,39 +76,48 @@ _________  ________   ________    ____  __..___ ___________  _________
         \/                   \/       \_/
 */
 
-
-  function filterVersionsFromJsonAndFillDom(verzije){
+  function filterVersionsFromJsonAndFillDom(verzije) {
     var datumi = [];
     var aktivniRaspored = "";
     for (var i = verzije.length - 1; i >= 0; i--) {
       datumi.push(verzije[i].substring(0, verzije[i].length - 6));
     }
     datumi = datumi.filter(function(item, pos) {
-        return datumi.indexOf(item) == pos;
+      return datumi.indexOf(item) == pos;
     });
     datumi = datumi.sort(function(a, b) {
-        a = new Date(a);
-        b = new Date(b);
-        return a>b ? -1 : a<b ? 1 : 0;
+      a = new Date(a);
+      b = new Date(b);
+      return a > b ? -1 : a < b ? 1 : 0;
     });
     for (var i = 0; i < datumi.length; i++) {
       var d = new Date(datumi[i]);
       var today = new Date();
-      var calc = new Date(datumi[i] + " "  + (1900+today.getYear())).getTime() - (today.getTime() + 259200000);
+      var calc =
+        new Date(datumi[i] + " " + (1900 + today.getYear())).getTime() -
+        (today.getTime() + 259200000);
       if (calc > 0 && calc < 604800000) {
         verzija = datumi[i];
       }
-      $("#datum").append('<option> ' + datumi[i].match(/\d/g).join("") + "." + (d.getMonth()+1) + '. </option>');
+      $("#datum").append(
+        "<option> " +
+          datumi[i].match(/\d/g).join("") +
+          "." +
+          (d.getMonth() + 1) +
+          ". </option>"
+      );
     }
   }
 
   // dohvacanje verzija rasporeda
-  function getVersion(){
-    if(window.localStorage.getItem('verzije')){
-      filterVersionsFromJsonAndFillDom(JSON.parse(window.localStorage.getItem("verzije")));
+  function getVersion() {
+    if (window.localStorage.getItem("verzije")) {
+      filterVersionsFromJsonAndFillDom(
+        JSON.parse(window.localStorage.getItem("verzije"))
+      );
     } else {
       $.ajax({
-        url: baseURL+"versions.json",
+        url: baseURL + "versions.json",
         dataType: "json",
         async: false,
         success: function(callback) {
@@ -123,42 +133,48 @@ _________  ________   ________    ____  __..___ ___________  _________
     // za obje smjene
     if (smjena === "A/B") {
       var result = [];
-      if(window.localStorage.getItem(verzija+"A") && window.localStorage.getItem(verzija+"B")) {
-        result[0] = JSON.parse(window.localStorage.getItem(verzija+"A"));
-        result[1] = JSON.parse(window.localStorage.getItem(verzija+"B"));
+      if (
+        window.localStorage.getItem(verzija + "A") &&
+        window.localStorage.getItem(verzija + "B")
+      ) {
+        result[0] = JSON.parse(window.localStorage.getItem(verzija + "A"));
+        result[1] = JSON.parse(window.localStorage.getItem(verzija + "B"));
         return result;
       }
       $.ajax({
-        url: baseURL+verzija+"A.json",
+        url: baseURL + verzija + "A.json",
         dataType: "json",
         async: false,
         success: function(callback) {
           result[0] = callback;
-          window.localStorage.setItem(verzija+"A", JSON.stringify(callback));
+          window.localStorage.setItem(verzija + "A", JSON.stringify(callback));
         }
       });
       $.ajax({
-        url: baseURL+verzija+"B.json",
+        url: baseURL + verzija + "B.json",
         dataType: "json",
         async: false,
         success: function(callback) {
           result[1] = callback;
-          window.localStorage.setItem(verzija+"B", JSON.stringify(callback));
+          window.localStorage.setItem(verzija + "B", JSON.stringify(callback));
         }
       });
     } else {
-      if(window.localStorage.getItem(verzija+smjena)) {
-        result = JSON.parse(window.localStorage.getItem(verzija+smjena));
+      if (window.localStorage.getItem(verzija + smjena)) {
+        result = JSON.parse(window.localStorage.getItem(verzija + smjena));
         return result;
       }
       // za jednu smjenu
       $.ajax({
-        url: baseURL+verzija+smjena+".json",
+        url: baseURL + verzija + smjena + ".json",
         dataType: "json",
         async: false,
         success: function(callback) {
           result = callback;
-          window.localStorage.setItem(verzija+smjena, JSON.stringify(callback));
+          window.localStorage.setItem(
+            verzija + smjena,
+            JSON.stringify(callback)
+          );
         }
       });
     }
@@ -175,8 +191,11 @@ _____________________    _____   __________.___ .____     .___ _________     ___
 
   // Modal input
   $("select").change(function() {
-    var selected = $("select option:selected").text().split(".") || [];
-    verzija = months[parseInt(selected[1])-1]+selected[0].replace(/ /g,"");
+    var selected =
+      $("select option:selected")
+        .text()
+        .split(".") || [];
+    verzija = months[parseInt(selected[1]) - 1] + selected[0].replace(/ /g, "");
     console.log(verzija);
     try {
       trazilicaData();
@@ -220,7 +239,9 @@ _____________________    _____   __________.___ .____     .___ _________     ___
     $.each(arr, function(i, el) {
       if ($.inArray(el, ACsrc) === -1) ACsrc.push(el);
     });
-    ACsrc = ACsrc.filter(word => word.length < 4);
+    ACsrc = ACsrc.filter(function(word) {
+      return word.length < 4;
+    });
     trazilicaInit();
   }
 
@@ -395,21 +416,20 @@ _____________________    _____   __________.___ .____     .___ _________     ___
     var counter = -1;
     for (var param = 1; param < 36; param += 7) {
       var text = "";
-      var counter2 = -1;
+      var counter2 = 0;
       for (var i = 0; i < data.length; i++) {
-        for (ii = 1; ii < data[i].length; ii++) {
+        for (var ii = 1; ii < data[i].length; ii++) {
           if (
             data[i][ii][0]
               .toUpperCase()
               .replace(/ /g, "")
               .indexOf(input.replace(/ /g, "")) !== -1
           ) {
-            counter2++;
             text +=
               counter2 === 0
                 ? "<tr><th>PRIJEPODNE</th></tr>"
                 : "<tr><th>POSLIJEPODNE</th></tr>";
-            for (iii = param; iii < param + 7; iii++) {
+            for (var iii = param; iii < param + 7; iii++) {
               if (typeof data[i][ii][iii] === "object") {
                 text +=
                   "<tr><th>" +
@@ -433,6 +453,7 @@ _____________________    _____   __________.___ .____     .___ _________     ___
             }
           }
         }
+        counter2++;
       }
       counter++;
       document.getElementById(daniID[counter]).innerHTML = text;
@@ -449,7 +470,7 @@ _____________________    _____   __________.___ .____     .___ _________     ___
     for (var param = 1; param < 36; param += 7) {
       // Filtriranje
       var text = "";
-      for (y = param; y < param + 7; y++) {
+      for (var y = param; y < param + 7; y++) {
         var provjera = 0; //varijabla za provjeru dijeli li se razred na grupe
         text +=
           "<th>" +
@@ -460,7 +481,7 @@ _____________________    _____   __________.___ .____     .___ _________     ___
           ")" +
           "</th>" +
           "<tr>";
-        for (x = 1; x < dataL; x++) {
+        for (var x = 1; x < dataL; x++) {
           // loopanje kroz redove
           if (String(data[x][y].name).indexOf(input) != -1) {
             // ako je pronadjen raz
@@ -533,6 +554,11 @@ _____________________    _____   __________.___ .____     .___ _________     ___
 
   // Nakon dohvacanja sitnice
   function finalTouch(data) {
+    if (data.hasOwnProperty("A") && data.hasOwnProperty("B")) {
+      $("#napomena").show().insertAdjacentHTML('beforeend', data.A.napomena);
+    } else {
+      $("#napomena").show().insertAdjacentHTML('beforeend', data.napomena);
+    }
     document.getElementById("info").innerHTML =
       "Raspored za: <br>" +
       (data.hasOwnProperty("A") && data.hasOwnProperty("B")
