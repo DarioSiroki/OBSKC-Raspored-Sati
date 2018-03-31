@@ -196,7 +196,6 @@ _____________________    _____   __________.___ .____     .___ _________     ___
         .text()
         .split(".") || [];
     verzija = months[parseInt(selected[1]) - 1] + selected[0].replace(/ /g, "");
-    console.log(verzija);
     try {
       trazilicaData();
     } catch (error) {}
@@ -554,18 +553,22 @@ _____________________    _____   __________.___ .____     .___ _________     ___
 
   // Nakon dohvacanja sitnice
   function finalTouch(data) {
-    console.log(data);
-    if (data.napomena || data.A.napomena) {
-      if (data.hasOwnProperty("A") && data.hasOwnProperty("B")) {
+    if (data.hasOwnProperty("A") && data.hasOwnProperty("B")) {
+      if (data.A.napomena) {
         $("#napomena").html(data.A.napomena);
         $("div.alert.alert-warning").show();
       } else {
-        $("#napomena").html(data.napomena);
-        $("div.alert.alert-warning").show();
+        $("div.alert.alert-warning").hide();
+        $("#napomena").html("");
       }
     } else {
-      $("div.alert.alert-warning").hide();
-      $("#napomena").html("");
+      if (data.napomena) {
+        $("#napomena").html(data.napomena);
+        $("div.alert.alert-warning").show();
+      } else {
+        $("div.alert.alert-warning").hide();
+        $("#napomena").html("");
+      }
     }
     document.getElementById("info").innerHTML =
       "Raspored za: <br>" +
