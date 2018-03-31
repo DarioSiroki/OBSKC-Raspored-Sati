@@ -554,10 +554,18 @@ _____________________    _____   __________.___ .____     .___ _________     ___
 
   // Nakon dohvacanja sitnice
   function finalTouch(data) {
-    if (data.hasOwnProperty("A") && data.hasOwnProperty("B")) {
-      $("#napomena").show().insertAdjacentHTML('beforeend', data.A.napomena);
+    console.log(data);
+    if (data.napomena || data.A.napomena) {
+      if (data.hasOwnProperty("A") && data.hasOwnProperty("B")) {
+        $("#napomena").html(data.A.napomena);
+        $("div.alert.alert-warning").show();
+      } else {
+        $("#napomena").html(data.napomena);
+        $("div.alert.alert-warning").show();
+      }
     } else {
-      $("#napomena").show().insertAdjacentHTML('beforeend', data.napomena);
+      $("div.alert.alert-warning").hide();
+      $("#napomena").html("");
     }
     document.getElementById("info").innerHTML =
       "Raspored za: <br>" +
