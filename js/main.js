@@ -177,7 +177,6 @@ _____________________    _____   __________.___ .____     .___ _________     ___
   $("select").change(function() {
     var selected = $("select option:selected").text().split(".") || [];
     verzija = months[parseInt(selected[1])-1]+selected[0].replace(/ /g,"");
-    console.log(verzija);
     try {
       trazilicaData();
     } catch (error) {}
