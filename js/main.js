@@ -96,7 +96,8 @@ _________  ________   ________    ____  __..___ ___________  _________
       var calc =
         new Date(datumi[i] + " " + (1900 + today.getYear())).getTime() -
         (today.getTime() + 259200000);
-      if (calc > 0 && calc < 604800000) {
+        console.log(calc);
+      if (calc < 0 && calc > -604800000) {
         verzija = datumi[i];
       }
       $("#datum").append(
