@@ -191,16 +191,13 @@ _____________________    _____   __________.___ .____     .___ _________     ___
 
   // Modal input
   $("select").change(function() {
-<<<<<<< HEAD
     var selected = $("select option:selected").text().split(".") || [];
     verzija = months[parseInt(selected[1])-1]+selected[0].replace(/ /g,"");
-=======
     var selected =
       $("select option:selected")
         .text()
         .split(".") || [];
     verzija = months[parseInt(selected[1]) - 1] + selected[0].replace(/ /g, "");
->>>>>>> 8d8fa3f5f9399b0ab79393421f0bcccd7b2b0d6d
     try {
       trazilicaData();
     } catch (error) {}
