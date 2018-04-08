@@ -96,7 +96,7 @@ _________  ________   ________    ____  __..___ ___________  _________
       var calc =
         new Date(datumi[i] + " " + (1900 + today.getYear())).getTime() -
         (today.getTime() + 259200000);
-      if (calc > 0 && calc < 604800000) {
+      if (calc < 0 && calc > -604800000) {
         verzija = datumi[i];
       }
       $("#datum").append(
@@ -191,8 +191,6 @@ _____________________    _____   __________.___ .____     .___ _________     ___
 
   // Modal input
   $("select").change(function() {
-    var selected = $("select option:selected").text().split(".") || [];
-    verzija = months[parseInt(selected[1])-1]+selected[0].replace(/ /g,"");
     var selected =
       $("select option:selected")
         .text()
