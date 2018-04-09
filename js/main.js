@@ -1,4 +1,9 @@
 $(document).ready(function() {
+
+  if (window.localStorage.getItem("smjena") && window.localStorage.getItem("smjena")==="js/A.json" || window.localStorage.getItem("smjena")==="js/B.json") {
+    window.localStorage.setItem("smjena","");
+  }
+  
   var baseURL =
     "https://raw.githubusercontent.com/DarioSiroki/OBSKC-Raspored-Sati/master/converter/data/json/";
   var input, smjena, osoba, verzija;
