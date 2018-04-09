@@ -1,10 +1,11 @@
-const fs = require("fs");
-const XLSX = require("xlsx-style"); // https://github.com/protobi/js-xlsx
+const fs = require("fs"),
+XLSX = require("xlsx-style"), // https://github.com/protobi/js-xlsx
 
-const debug = false;
-const scanDir = "../data/xlsx/";
-const writeDir = "../data/json/"
-const loopabet = [
+debug = false,
+filterWords = ["kon.","kuh."],
+scanDir = "../data/xlsx/",
+writeDir = "../data/json/",
+loopabet = [
 	"B",
 	"C",
 	"D",
@@ -40,8 +41,8 @@ const loopabet = [
 	"AH",
 	"AI",
 	"AJ"
-];
-const months = {
+],
+months = {
 	'1': 'January', 
 	'2': 'February', 
 	'3': 'March', 
@@ -55,6 +56,22 @@ const months = {
 	'11': 'November', 
 	'12': 'December'
 };
+
+let filter = (data) => {
+	for (let i = 1; i < data.length; i++) {
+		for (let ii = 1; ii < data[i].length; ii++) {
+			let podatak = data[i][ii];
+			for (let iii = 0; iii < filterWords.length; iii++) {
+				if (typeof podatak === "object" && podatak.hasOwnProperty("name") && podatak.name) {
+					if (typeof podatak.name != "string" || podatak.name.toUpperCase().indexOf(filterWords[iii].toUpperCase())!==-1) {
+						podatak.name = "";
+					}
+				}
+			}
+		}
+	}
+	return data;
+}
 
 let writeVersions = () => {
 	let versions = [];
@@ -82,6 +99,7 @@ let rmWeirdfiles = () => {
 		}
 	});
 };
+
 
 let componentToHex = c => {
 	var hex = c.toString(16);
@@ -246,7 +264,7 @@ for (let i = 0; i < paths.length; i++) {
 
 	fs.writeFile(
 		writeDir + formatName(paths[i]),
-		JSON.stringify(final),
+		JSON.stringify(filter(final)),
 		function(err) {
 			if (err) {
 				return console.log(err);
