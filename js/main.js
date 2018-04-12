@@ -1,9 +1,12 @@
 $(document).ready(function() {
-
-  if (window.localStorage.getItem("smjena") && window.localStorage.getItem("smjena")==="js/A.json" || window.localStorage.getItem("smjena")==="js/B.json") {
-    window.localStorage.setItem("smjena","");
+  if (
+    (window.localStorage.getItem("smjena") &&
+      window.localStorage.getItem("smjena") === "js/A.json") ||
+    window.localStorage.getItem("smjena") === "js/B.json"
+  ) {
+    window.localStorage.setItem("smjena", "");
   }
-  
+
   var baseURL =
     "https://raw.githubusercontent.com/DarioSiroki/OBSKC-Raspored-Sati/master/converter/data/json/";
   var input, smjena, osoba, verzija;
@@ -103,15 +106,20 @@ _________  ________   ________    ____  __..___ ___________  _________
         (today.getTime() + 259200000);
       if (calc < 0 && calc > -604800000) {
         verzija = datumi[i];
+        var verzijaMjesec = d.getMonth() + 1;
+        var id = i;
       }
       $("#datum").append(
-        "<option> " +
+        "<option value=" +
+          i +
+          "> " +
           datumi[i].match(/\d/g).join("") +
           "." +
           (d.getMonth() + 1) +
           ". </option>"
       );
     }
+    $("select#datum").val(id);
   }
 
   // dohvacanje verzija rasporeda
@@ -200,6 +208,7 @@ _____________________    _____   __________.___ .____     .___ _________     ___
       $("select option:selected")
         .text()
         .split(".") || [];
+    console.log(selected);
     verzija = months[parseInt(selected[1]) - 1] + selected[0].replace(/ /g, "");
     try {
       trazilicaData();
@@ -367,6 +376,20 @@ _____________________    _____   __________.___ .____     .___ _________     ___
     for (var i = 0; i < daniID.length; i++) {
       document.getElementById(daniID[i]).innerHTML = "";
     }
+  }
+
+  function whiteTextForReadability() {
+    $("p.inline").each(function() {
+      var styles = $(this).css(["background-color", "color", "pattern"]);
+      if (
+        styles["background-color"] !== "rgba(0, 0, 0, 0)" &&
+        styles["background-color"] !== "rgb(204, 255, 204)" &&
+        styles.pattern !== null &&
+        styles.color === "rgb(51, 51, 51)"
+      ) {
+        $(this).css("color", "#FFFFFF");
+      }
+    });
   }
 
   // Filtriranje i punjenje u accordion aka tour-de-france, gl
@@ -591,6 +614,7 @@ _____________________    _____   __________.___ .____     .___ _________     ___
     $("#accordion").accordion({
       active: n - 1 //Otvori tab koji je dan
     });
+    whiteTextForReadability();
     //document.activeElement.blur(); // Fix za bug tipkovnice koja ostane otvorena na mobitelu
   }
 
