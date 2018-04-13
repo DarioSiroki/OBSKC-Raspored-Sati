@@ -124,11 +124,11 @@ _________  ________   ________    ____  __..___ ___________  _________
 
   // dohvacanje verzija rasporeda
   function getVersion() {
-    if (window.localStorage.getItem("verzije")) {
+    if (window.localStorage.getItem("verzije") && !navigator.onLine) {
       filterVersionsFromJsonAndFillDom(
         JSON.parse(window.localStorage.getItem("verzije"))
       );
-    } else {
+    } else if (navigator.onLine) {
       $.ajax({
         url: baseURL + "versions.json",
         dataType: "json",
@@ -138,6 +138,8 @@ _________  ________   ________    ____  __..___ ___________  _________
           filterVersionsFromJsonAndFillDom(callback);
         }
       });
+    } else {
+      alert("Spojite se na internet da bi se rasporedi mogli preuzeti, nakon što se preuzmu aplikacija radi bez internetske konekcije.")
     }
   }
 
