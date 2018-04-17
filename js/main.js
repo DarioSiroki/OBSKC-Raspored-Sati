@@ -99,7 +99,7 @@ _________  ________   ________    ____  __..___ ___________  _________
       return a > b ? -1 : a < b ? 1 : 0;
     });
     for (var i = 0; i < datumi.length; i++) {
-      var d = new Date(datumi[i]);
+      var d = new Date(datumi[i]+",2018");
       var today = new Date();
       var calc =
         new Date(datumi[i] + " " + (1900 + today.getYear())).getTime() -
@@ -109,6 +109,7 @@ _________  ________   ________    ____  __..___ ___________  _________
         var verzijaMjesec = d.getMonth() + 1;
         var id = i;
       }
+      console.log(datumi[i]);
       $("#datum").append(
         "<option value=" +
           i +
