@@ -109,7 +109,6 @@ _________  ________   ________    ____  __..___ ___________  _________
         var verzijaMjesec = d.getMonth() + 1;
         var id = i;
       }
-      console.log(datumi[i]);
       $("#datum").append(
         "<option value=" +
           i +
