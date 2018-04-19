@@ -104,7 +104,7 @@ _________  ________   ________    ____  __..___ ___________  _________
       var calc =
         new Date(datumi[i] + " " + (1900 + today.getYear())).getTime() -
         (today.getTime() + 259200000);
-      if (calc < 0 && calc > -518400000) {
+      if (calc < 0 && calc > -691200000) {
         verzija = datumi[i];
         var verzijaMjesec = d.getMonth() + 1;
         var id = i;
