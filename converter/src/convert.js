@@ -1,47 +1,10 @@
 const fs = require("fs"),
 XLSX = require("xlsx-style"), // https://github.com/protobi/js-xlsx
-
 debug = false,
 filterWords = ["kon.","kuh."],
 scanDir = "../data/xlsx/",
 writeDir = "../data/json/",
-loopabet = [
-	"B",
-	"C",
-	"D",
-	"E",
-	"F",
-	"G",
-	"H",
-	"I",
-	"J",
-	"K",
-	"L",
-	"M",
-	"N",
-	"O",
-	"P",
-	"Q",
-	"R",
-	"S",
-	"T",
-	"U",
-	"V",
-	"W",
-	"X",
-	"Y",
-	"Z",
-	"AA",
-	"AB",
-	"AC",
-	"AD",
-	"AE",
-	"AF",
-	"AG",
-	"AH",
-	"AI",
-	"AJ"
-],
+alphabet = ["B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","AA","AB","AC","AD","AE","AF","AG","AH","AI","AJ"],
 months = {
 	'1': 'January', 
 	'2': 'February', 
@@ -152,7 +115,12 @@ let formatName = input => {
 // skeniranje foldera
 paths = [];
 fs.readdirSync(scanDir).forEach(file => {
-	paths.push(file);
+	fs.stat(("D:&programiranje&USBWebserver v8.6&root&OBSKC-Raspored-Sati&converter&data&xlsx&"+file).replace(/&/g,"/"), (err,stats)=>{
+		let seconds = (new Date().getTime() - stats.mtime) / 1000;
+		if (seconds<172800) {//172800 = 2 dana, ako je file modified prije vise od 2 dana ne konvertiraj ga
+			paths.push(file);
+		}
+	});
 });
 // izbacivanje stavki koje nisu xlsx
 paths = paths.filter(word => word.toUpperCase().indexOf("XLSX") !== -1);
@@ -184,8 +152,8 @@ for (let i = 0; i < paths.length; i++) {
 		if (typeof workbook["A" + ii] !== "undefined") {
 			let profesor = [];
 			profesor.push(workbook["A" + ii].v);
-			for (let iii = 0; iii < loopabet.length; iii++) {
-				let razred = workbook[loopabet[iii] + ii];
+			for (let iii = 0; iii < alphabet.length; iii++) {
+				let razred = workbook[alphabet[iii] + ii];
 				if (razred.v === "") {
 					// za prazne celije
 					profesor.push("");
