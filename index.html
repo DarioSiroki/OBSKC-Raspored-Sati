@@ -16,7 +16,9 @@
     <script src="js/jquery-ui.min.js"></script>
   </head>
   <!-- Zaglavlje -->
-  <body>
+  <body onload="$('.hider').fadeOut('slow');$('.loader').fadeOut('fast');">
+    <div class="hider"></div>
+    <div class="loader"></div>
     <div class="container">
       <div class="jumbotron">
         <div class="row">
