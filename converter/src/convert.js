@@ -1,6 +1,6 @@
 const fs = require("fs"),
 XLSX = require("xlsx-style"), // https://github.com/protobi/js-xlsx
-debug = false,
+debug = true,
 filterWords = ["kon.","kuh."],
 scanDir = "../data/xlsx/",
 writeDir = "../data/json/",
@@ -156,7 +156,7 @@ setTimeout(()=>{
 				profesor.push(workbook["A" + ii].v);
 				for (let iii = 0; iii < alphabet.length; iii++) {
 					let razred = workbook[alphabet[iii] + ii];
-					if (razred.v === "") {
+					if (typeof razred == "undefined" || razred.v === "") {
 						// za prazne celije
 						profesor.push("");
 					} else {
