@@ -1,6 +1,6 @@
 const fs = require("fs"),
 XLSX = require("xlsx-style"), // https://github.com/protobi/js-xlsx
-debug = true,
+debug = false,
 filterWords = ["kon.","kuh."],
 scanDir = "../data/xlsx/",
 writeDir = "../data/json/",
