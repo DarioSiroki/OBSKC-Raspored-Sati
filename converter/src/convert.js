@@ -99,7 +99,7 @@ let tintAndHexToHex = (hex, tint) => {
 };
 
 let formatName = input => {
-  input = input.toLowerCase().replace("smjena","").replace("xlsx","json").split(".");
+  input = input.toLowerCase().replace("smjena","").replace(/ /g,"").replace("xlsx","json").split(".");
   let smjena = "";
   for (let i = 0; i < input.length; i++) {
     if(input[i].toUpperCase().indexOf("A")!=-1) {
