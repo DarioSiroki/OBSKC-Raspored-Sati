@@ -147,6 +147,7 @@ setTimeout(()=>{
 			prijeposlije: workbook.A1.v.search("POSLIJE") === -1 ? "PRIJE" : "POSLIJE",
 			napomena: ""
 		};
+
 		final.push(info);
 
 		// vrti kroz prvih 100 redaka

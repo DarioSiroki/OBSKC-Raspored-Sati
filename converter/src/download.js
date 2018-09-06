@@ -20,6 +20,18 @@ const months = {
 
 const url = "http://ss-obrtnicka-koprivnica.skole.hr/rasporedsati?dm2_foldercontents=103&forcetpl=1&mshow=mod_docman&onlylid=mod_docman";
 
+let isNumber = (char) => {
+	return !isNaN(parseFloat(char)) && isFinite(char);
+}
+
+let isTimetable = (str) => {
+	returnValue = false;
+	str.split("").forEach(letter=>{
+		if(isNumber(letter))	returnValue = true;
+	});
+	return returnValue;
+}
+
 let getUrls = () => {
 	return new Promise((resolve, reject) => {
 		request({url: url},(error, resp, body) => {
@@ -44,10 +56,13 @@ let downloadXLSX = (props) => {
 		request
 		  .get('http://ss-obrtnicka-koprivnica.skole.hr'+props[i].url+'&dm_dnl=1')
 		  .on('error', function(err) {
-		    console.log(err)
+		    console.log(err);
 		  })
 		  .pipe(fs.createWriteStream(writeDir + props[i].naziv));
-		  console.log("Preuzeto: "+props[i].naziv);
+		  if(!isTimetable(props[i].naziv))
+		  	fs.unlinkSync(writeDir + props[i].naziv)
+		  else 
+		  	console.log("Preuzeto: "+props[i].naziv);
 	  }
 }
 
