@@ -2,8 +2,8 @@ const fs = require("fs"),
 XLSX = require("xlsx-style"), // https://github.com/protobi/js-xlsx
 debug = false,
 filterWords = ["kon.","kuh."],
-scanDir = "../data/xlsx/",
-writeDir = "../data/json/",
+scanDir = "./data/xlsx/",
+writeDir = "./data/json/",
 alphabet = ["B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","AA","AB","AC","AD","AE","AF","AG","AH","AI","AJ"],
 months = {
 	'1': 'January', 
@@ -115,7 +115,7 @@ let formatName = input => {
 // skeniranje foldera
 paths = [];
 fs.readdirSync(scanDir).forEach(file => {
-	fs.stat(("D:&programiranje&USBWebserver v8.6&root&OBSKC-Raspored-Sati&converter&data&xlsx&"+file).replace(/&/g,"/"), (err,stats)=>{
+	fs.stat((scanDir+file), (err,stats)=>{
 		let seconds = (new Date().getTime() - stats.mtime) / 1000;
 		if (seconds<172800) {//172800 = 2 dana, ako je file modified prije vise od 2 dana ne konvertiraj ga
 			paths.push(file);

@@ -2,7 +2,7 @@ const fs = require('fs');
 const request = require("request");
 const cheerio = require("cheerio");
 
-const writeDir = "../data/xlsx/"
+const writeDir = "./data/xlsx/"
 const months = {
 	'1': 'January', 
 	'2': 'February', 
