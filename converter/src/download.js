@@ -29,6 +29,9 @@ let isTimetable = (str) => {
 	str.split("").forEach(letter=>{
 		if(isNumber(letter))	returnValue = true;
 	});
+	if(str.toUpperCase().indexOf("PRAKS")>-1){
+		return false;
+	}
 	return returnValue;
 }
 
