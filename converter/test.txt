@@ -1,0 +1,31 @@
+Preuzeto: 23.9._BSMJENA.XLSX
+Preuzeto: 23.9. A SMJENA.XLSX
+Preuzeto: 16.9._BSMJENA (4).XLSX
+Preuzeto: 16.9. A SMJENA.XLSX
+23.9. A SMJENA.XLSX konvertiran
+16.9._BSMJENA (4).XLSX konvertiran
+16.9. A SMJENA.XLSX konvertiran
+9.9. A SMJENA.XLSX konvertiran
+23.9._BSMJENA.XLSX konvertiran
+Verzije zapisane
+9.9._BSMJENA.XLSX konvertiran
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   converter/test.txt
+#
+[master 92a192e] auto-update
+ Committer: servergazdx <servergazdx@localhost.localdomain>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 3 insertions(+), 3 deletions(-)
