@@ -1,3 +1,4 @@
+git pull
 node ./src/download.js
 node ./src/convert.js
 cd .. 
