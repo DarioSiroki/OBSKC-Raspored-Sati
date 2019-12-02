@@ -1,9 +1,7 @@
 git pull
 node ./src/download.js
 node ./src/convert.js
-cd .. 
-git add .
+cd ..
 git status
-git commit -m "auto-update"
+git commit -am "auto-update"
 git push origin master
-
