@@ -42,10 +42,12 @@ let getAvailableTimetables = async () => {
   const timetables = await getAvailableTimetables();
   for (const timetable of timetables) {
     try {
-      const response = await axios.get(
-        `http://ss-obrtnicka-koprivnica.skole.hr${timetable.url}&dm_dnl=1`
-      );
-      fs.writeFileSync(`./data/xlsx/${timetable.title}`, response.data);
+      const response = await axios({
+        method: "get",
+        url: `http://ss-obrtnicka-koprivnica.skole.hr${timetable.url}&dm_dnl=1`,
+        responseType: "stream"
+      })
+      response.data.pipe(fs.createWriteStream(`./data/xlsx/${timetable.title}`))
       console.log(`PREUZETO: ${timetable.title}`);
     } catch(e) {
       throw new Error(e)
