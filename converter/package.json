@@ -9,9 +9,9 @@
   "author": "Dario Široki",
   "license": "WTFPL",
   "dependencies": {
+    "axios": "^0.19.2",
     "chalk": "^2.3.1",
     "cheerio": "^1.0.0-rc.2",
-    "request": "^2.88.0",
     "xlsx-style": "^0.8.13"
   }
 }

@@ -1,77 +1,54 @@
-const fs = require('fs');
-const request = require("request");
+const fs = require("fs");
+const axios = require("axios");
 const cheerio = require("cheerio");
 
-const writeDir = "./data/xlsx/"
-const months = {
-	'1': 'January', 
-	'2': 'February', 
-	'3': 'March', 
-	'4': 'April', 
-	'5': 'May', 
-	'6': 'June', 
-	'7': 'July', 
-	'8': 'August', 
-	'9': 'September', 
-	'10': 'October', 
-	'11': 'November', 
-	'12': 'December'
+let isTimetable = str => {
+  str = str.toUpperCase()
+  if (
+    !str.includes("XLSX") ||
+    str.includes("PRAKS") ||
+    !str.includes("SMJENA")
+  ) {
+    return false;
+  }
+  return true;
 };
 
-const url = "http://ss-obrtnicka-koprivnica.skole.hr/rasporedsati?dm2_foldercontents=103&forcetpl=1&mshow=mod_docman&onlylid=mod_docman";
+let getAvailableTimetables = async () => {
+  try {
+    const response = await axios.get(
+      "http://ss-obrtnicka-koprivnica.skole.hr/rasporedsati?dm2_foldercontents=103&forcetpl=1&mshow=mod_docman&onlylid=mod_docman"
+    );
+    let $ = cheerio.load(response.data);
+    const urls = $("td.fi-title a")
+      .map((i, el) => {
+        const title = $(el).text().toUpperCase();
+        const url = $(el).attr("href").replace("det", "rev")
+        if (isTimetable(title)) {
+          return {
+            title,
+            url
+          };
+        }
+      })
+      .get()
+    return urls;
+  } catch(e) {
+    throw new Error(e)
+  }
+};
 
-let isNumber = (char) => {
-	return !isNaN(parseFloat(char)) && isFinite(char);
-}
-
-let isTimetable = (str) => {
-	returnValue = false;
-	str.split("").forEach(letter=>{
-		if(isNumber(letter))	returnValue = true;
-	});
-	if(str.toUpperCase().indexOf("PRAKS")>-1){
-		return false;
-	}
-	return returnValue;
-}
-
-let getUrls = () => {
-	return new Promise((resolve, reject) => {
-		request({url: url},(error, resp, body) => {
-			if (body) {
-				let $ = cheerio.load(body);
-				let urls =  $("td.fi-title a").map((i,el) => {
-					if ($(el).text().toUpperCase().search("XLSX")!==-1) {
-						return {
-							naziv: $(el).text().toUpperCase(),
-							url: $(el).attr('href').replace("det","rev")
-						}; 
-					}
-				}).get();
-				resolve(urls);
-			}
-		});
-	});
-}
-
-let downloadXLSX = (props) => {
-	for (var i = props.length - 1; i >= 0; i--) {
-		request
-		  .get('http://ss-obrtnicka-koprivnica.skole.hr'+props[i].url+'&dm_dnl=1')
-		  .on('error', function(err) {
-		    console.log(err);
-		  })
-		  .pipe(fs.createWriteStream(writeDir + props[i].naziv));
-		  if(!isTimetable(props[i].naziv))
-		  	fs.unlinkSync(writeDir + props[i].naziv)
-		  else 
-		  	console.log("Preuzeto: "+props[i].naziv);
-	  }
-}
-
-getUrls()
-	.then(data=>{
-		downloadXLSX(data);
-	}).catch(error=>{
-		console.log(error);
-	});
+(async () => {
+  const timetables = await getAvailableTimetables();
+  for (const timetable of timetables) {
+    try {
+      const response = axios.get(
+        `http://ss-obrtnicka-koprivnica.skole.hr${timetable.url}&dm_dnl=1`
+      );
+      fs.writeFileSync(`./data/xlsx/${timetable.title}`, response.data);
+      console.log(`PREUZETO: ${timetable.title}`);
+    } catch(e) {
+      throw new Error(e)
+    }
+  }
+})();
