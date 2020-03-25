@@ -1,3 +1,4 @@
+#!/usr/bin/env sh
 git pull
 node ./src/download.js
 node ./src/convert.js
