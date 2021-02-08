@@ -2,8 +2,8 @@ const fs = require("fs");
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-let isTimetable = str => {
-  str = str.toUpperCase()
+let isTimetable = (str) => {
+  str = str.toUpperCase();
   if (
     !str.includes("XLSX") ||
     str.includes("PRAKS") ||
@@ -23,18 +23,18 @@ let getAvailableTimetables = async () => {
     const urls = $("td.fi-title a")
       .map((i, el) => {
         const title = $(el).text().toUpperCase();
-        const url = $(el).attr("href").replace("det", "rev")
+        const url = $(el).attr("href").replace("det", "rev");
         if (isTimetable(title)) {
           return {
             title,
-            url
+            url,
           };
         }
       })
-      .get()
+      .get();
     return urls;
-  } catch(e) {
-    throw new Error(e)
+  } catch (e) {
+    throw new Error(e);
   }
 };
 
@@ -45,13 +45,14 @@ let getAvailableTimetables = async () => {
       const response = await axios({
         method: "get",
         url: `http://ss-obrtnicka-koprivnica.skole.hr${timetable.url}&dm_dnl=1`,
-        responseType: "stream"
-      })
-      response.data.pipe(fs.createWriteStream(`./data/xlsx/${timetable.title}`))
+        responseType: "stream",
+      });
+      response.data.pipe(
+        fs.createWriteStream(`./data/xlsx/${timetable.title}`)
+      );
       console.log(`PREUZETO: ${timetable.title}`);
-    } catch(e) {
-      throw new Error(e)
+    } catch (e) {
+      throw new Error(e);
     }
   }
 })();
-
