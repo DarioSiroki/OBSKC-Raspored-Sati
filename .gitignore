@@ -1,3 +1,4 @@
 converter/node_modules
 app
 converter/log.txt
+**/.DS_Store
