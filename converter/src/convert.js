@@ -40,6 +40,13 @@ const fs = require("fs"),
     "AH",
     "AI",
     "AJ",
+    "AK",
+    "AL",
+    "AM",
+    "AN",
+    "AO",
+    "AP",
+    "AQ",
   ],
   months = {
     1: "January",
@@ -54,7 +61,28 @@ const fs = require("fs"),
     10: "October",
     11: "November",
     12: "December",
-  };
+  },
+  trajanjeU = [
+    null, // Nema nultog sata ujutro
+    "7.45-8.30",
+    "8.35-9.20",
+    "9.25-10.10",
+    "10.25-11.10",
+    "11.15-12.00",
+    "12.05-12.50",
+    "12.55-13.40",
+    "13.45-14.30",
+  ],
+  trajanjeP = [
+    "12.55-13.40",
+    "13.45-14.30",
+    "14.35-15.20",
+    "15.25-16.10",
+    "16.25-17.10",
+    "17.15-18.00",
+    "18.05-18.50",
+    "18.55-19.40",
+  ];
 
 let filter = (data) => {
   for (let i = 1; i < data.length; i++) {
@@ -179,16 +207,11 @@ fs.readdirSync(scanDir).forEach((file) => {
 paths = paths.filter((word) => word.toUpperCase().indexOf("XLSX") !== -1);
 
 for (let i = 0; i < paths.length; i++) {
-  var workbookRead;
   // citanje xlsxa
-  try {
-    workbookRead = XLSX.readFile(scanDir + paths[i], {
-      cellStyles: true,
-      cellHTML: false,
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  const workbookRead = XLSX.readFile(scanDir + paths[i], {
+    cellStyles: true,
+    cellHTML: false,
+  });
 
   var workbook = workbookRead.Sheets[workbookRead.Props.SheetNames[0]];
 
@@ -200,6 +223,8 @@ for (let i = 0; i < paths.length; i++) {
     napomena: "",
   };
 
+  const trajanja = info.prijeposlije === "PRIJE" ? trajanjeU : trajanjeP;
+
   final.push(info);
 
   // vrti kroz prvih 100 redaka
@@ -208,6 +233,10 @@ for (let i = 0; i < paths.length; i++) {
       let profesor = [];
       profesor.push(workbook["A" + ii].v);
       for (let iii = 0; iii < alphabet.length; iii++) {
+        const slovo = alphabet[iii];
+        const sat = workbook[slovo + "3"];
+        if (typeof sat === "undefined") break;
+
         let razred = workbook[alphabet[iii] + ii];
         if (typeof razred == "undefined" || razred.v === "") {
           // za prazne celije
@@ -215,6 +244,8 @@ for (let i = 0; i < paths.length; i++) {
         } else {
           let fill = {
             name: razred.v,
+            trajanje: trajanja[sat.v],
+            sat: sat.v,
           };
 
           if (razred.s.fill) {
