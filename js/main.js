@@ -509,28 +509,25 @@ _____________________    _____   __________.___ .____     .___ _________     ___
           "<tr>";
         for (var x = 1; x < dataL; x++) {
           // loopanje kroz redove
-          if (String(data[x][y].name).indexOf(input) != -1) {
+          const celija = data[x][y];
+          if (celija && celija.name.indexOf(input) != -1) {
             if (!seDijeliNaGrupe) {
               text += "<td>";
-              if (typeof data[x][y] === "object") {
-                text +=
-                  "<p class='inline' style='" +
-                  returnStyle(data[x][y]) +
-                  "'>" +
-                  data[x][0] +
-                  "</p>";
-              }
+              text +=
+                "<p class='inline' style='" +
+                returnStyle(celija) +
+                "'>" +
+                data[x][0] +
+                "</p>";
               seDijeliNaGrupe = true;
             } else {
               //  ispisi sa / za odvajanje profesora
-              if (typeof data[x][y] === "object") {
-                text +=
-                  "/<p class='inline' style='" +
-                  returnStyle(data[x][y]) +
-                  "'>" +
-                  data[x][0] +
-                  "</p>";
-              }
+              text +=
+                "/<p class='inline' style='" +
+                returnStyle(celija) +
+                "'>" +
+                data[x][0] +
+                "</p>";
             }
           }
         }
