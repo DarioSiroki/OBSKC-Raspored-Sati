@@ -497,7 +497,7 @@ _____________________    _____   __________.___ .____     .___ _________     ___
       // Filtriranje
       var text = "";
       for (var y = param; y < param + 7; y++) {
-        var provjera = 0; //varijabla za provjeru dijeli li se razred na grupe
+        let seDijeliNaGrupe = false; //varijabla za provjeru dijeli li se razred na grupe
         text +=
           "<th>" +
           (y - param + 1) +
@@ -510,30 +510,27 @@ _____________________    _____   __________.___ .____     .___ _________     ___
         for (var x = 1; x < dataL; x++) {
           // loopanje kroz redove
           if (String(data[x][y].name).indexOf(input) != -1) {
-            // ako je pronadjen raz
-            if (provjera == 0) {
-              //uvjet za provjeru
-              text +=
-                "<td>" +
-                (typeof data[x][y] === "object"
-                  ? "<p class='inline' style='" +
-                    returnStyle(data[x][y]) +
-                    "'>" +
-                    data[x][0] +
-                    "</p>"
-                  : "");
-              provjera++;
+            if (!seDijeliNaGrupe) {
+              text += "<td>";
+              if (typeof data[x][y] === "object") {
+                text +=
+                  "<p class='inline' style='" +
+                  returnStyle(data[x][y]) +
+                  "'>" +
+                  data[x][0] +
+                  "</p>";
+              }
+              seDijeliNaGrupe = true;
             } else {
               //  ispisi sa / za odvajanje profesora
-              text +=
-                "/" +
-                (typeof data[x][y] === "object"
-                  ? "<p class='inline' style='" +
-                    returnStyle(data[x][y]) +
-                    "'>" +
-                    data[x][0] +
-                    "</p>"
-                  : "");
+              if (typeof data[x][y] === "object") {
+                text +=
+                  "/<p class='inline' style='" +
+                  returnStyle(data[x][y]) +
+                  "'>" +
+                  data[x][0] +
+                  "</p>";
+              }
             }
           }
         }
