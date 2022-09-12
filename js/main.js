@@ -490,52 +490,41 @@ _____________________    _____   __________.___ .____     .___ _________     ___
   // Ucenik
   function getUcenik(data, dataL) {
     clearDOM();
-    // Counter za danID
-    var counter = -1;
-    // Param je varijabla koja se prilagodjava danu
-    for (var param = 1; param < 36; param += 7) {
+    let dan = 0;
+    let prosliSat = -999;
+
+    let text = "";
+    for (let y = 1; y < 40; y++) {
       // Filtriranje
-      var text = "";
-      for (var y = param; y < param + 7; y++) {
-        let seDijeliNaGrupe = false; //varijabla za provjeru dijeli li se razred na grupe
-        text +=
-          "<th>" +
-          (y - param + 1) +
-          ".sat" +
-          " (" +
-          trajanje[y - param] +
-          ")" +
-          "</th>" +
-          "<tr>";
-        for (var x = 1; x < dataL; x++) {
-          // loopanje kroz redove
-          const celija = data[x][y];
-          if (celija && celija.name.indexOf(input) != -1) {
-            if (!seDijeliNaGrupe) {
-              text += "<td>";
-              text +=
-                "<p class='inline' style='" +
-                returnStyle(celija) +
-                "'>" +
-                data[x][0] +
-                "</p>";
-              seDijeliNaGrupe = true;
-            } else {
-              //  ispisi sa / za odvajanje profesora
-              text +=
-                "/<p class='inline' style='" +
-                returnStyle(celija) +
-                "'>" +
-                data[x][0] +
-                "</p>";
+      let seDijeliNaGrupe = false; //varijabla za provjeru dijeli li se razred na grupe
+
+      for (var x = 1; x < dataL; x++) {
+        // loopanje kroz redove
+        const celija = data[x][y];
+        if (celija && celija.name.indexOf(input) != -1) {
+          if (!seDijeliNaGrupe) {
+            const jeNoviDan = celija.sat < prosliSat;
+            prosliSat = celija.sat;
+            if (jeNoviDan) {
+              document.getElementById(daniID[dan++]).innerHTML = text;
+              text = "";
             }
+            text += `<th>${celija.sat}.sat (${celija.trajanje})</th><tr><td>`;
+            text += `<p class='inline' style='${returnStyle(celija)}'>${
+              data[x][0]
+            }</p>`;
+            seDijeliNaGrupe = true;
+          } else {
+            //  ispisi sa / za odvajanje profesora
+            text += `/<p class='inline' style='${returnStyle(celija)}'>${
+              data[x][0]
+            }</p>`;
           }
         }
-        text += "</td></tr>";
       }
-      counter++;
-      document.getElementById(daniID[counter]).innerHTML = text;
+      text += "</td></tr>";
     }
+    document.getElementById(daniID[dan++]).innerHTML = text;
     finalTouch(data[0]);
   }
 
