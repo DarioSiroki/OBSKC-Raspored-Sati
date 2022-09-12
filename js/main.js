@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
   if (
     (window.localStorage.getItem("smjena") &&
       window.localStorage.getItem("smjena") === "js/A.json") ||
@@ -24,7 +24,7 @@ $(document).ready(function() {
     "September",
     "October",
     "November",
-    "December"
+    "December",
   ];
   var daniID = ["pon", "uto", "sri", "cet", "pet"],
     trajanjeU = [
@@ -34,7 +34,7 @@ $(document).ready(function() {
       "10.25-11.10",
       "11.15-12.00",
       "12.05-12.50",
-      "12.55-13.40"
+      "12.55-13.40",
     ],
     trajanjeP = [
       "13.45-14.30",
@@ -43,14 +43,14 @@ $(document).ready(function() {
       "16.25-17.10",
       "17.15-18.00",
       "18.05-18.50",
-      "18.55-19.40"
+      "18.55-19.40",
     ];
 
   // Accordion postavke
   $("#accordion").accordion({
     collapsible: true,
     active: false,
-    heightStyle: "content"
+    heightStyle: "content",
   });
   /*
 _________  ________   ________    ____  __..___ ___________  _________
@@ -90,16 +90,16 @@ _________  ________   ________    ____  __..___ ___________  _________
     for (var i = verzije.length - 1; i >= 0; i--) {
       datumi.push(verzije[i].substring(0, verzije[i].length - 6));
     }
-    datumi = datumi.filter(function(item, pos) {
+    datumi = datumi.filter(function (item, pos) {
       return datumi.indexOf(item) == pos;
     });
-    datumi = datumi.sort(function(a, b) {
+    datumi = datumi.sort(function (a, b) {
       a = new Date(a);
       b = new Date(b);
       return a > b ? -1 : a < b ? 1 : 0;
     });
     for (var i = 0; i < datumi.length; i++) {
-      var d = new Date(datumi[i]+",2018");
+      var d = new Date(datumi[i] + ",2018");
       var today = new Date();
       var calc =
         new Date(datumi[i] + " " + (1900 + today.getYear())).getTime() -
@@ -133,13 +133,15 @@ _________  ________   ________    ____  __..___ ___________  _________
         url: baseURL + "versions.json",
         dataType: "json",
         async: false,
-        success: function(callback) {
+        success: function (callback) {
           window.localStorage.setItem("verzije", JSON.stringify(callback));
           filterVersionsFromJsonAndFillDom(callback);
-        }
+        },
       });
     } else {
-      alert("Spojite se na internet da bi se rasporedi mogli preuzeti, nakon što se preuzmu aplikacija radi bez internetske konekcije.")
+      alert(
+        "Spojite se na internet da bi se rasporedi mogli preuzeti, nakon što se preuzmu aplikacija radi bez internetske konekcije."
+      );
     }
   }
 
@@ -160,19 +162,19 @@ _________  ________   ________    ____  __..___ ___________  _________
         url: baseURL + verzija + "A.json",
         dataType: "json",
         async: false,
-        success: function(callback) {
+        success: function (callback) {
           result[0] = callback;
           window.localStorage.setItem(verzija + "A", JSON.stringify(callback));
-        }
+        },
       });
       $.ajax({
         url: baseURL + verzija + "B.json",
         dataType: "json",
         async: false,
-        success: function(callback) {
+        success: function (callback) {
           result[1] = callback;
           window.localStorage.setItem(verzija + "B", JSON.stringify(callback));
-        }
+        },
       });
     } else {
       if (window.localStorage.getItem(verzija + smjena)) {
@@ -184,13 +186,13 @@ _________  ________   ________    ____  __..___ ___________  _________
         url: baseURL + verzija + smjena + ".json",
         dataType: "json",
         async: false,
-        success: function(callback) {
+        success: function (callback) {
           result = callback;
           window.localStorage.setItem(
             verzija + smjena,
             JSON.stringify(callback)
           );
-        }
+        },
       });
     }
     return result;
@@ -205,36 +207,31 @@ _____________________    _____   __________.___ .____     .___ _________     ___
 */
 
   // Modal input
-  $("select").change(function() {
-    var selected =
-      $("select option:selected")
-        .text()
-        .split(".") || [];
+  $("select").change(function () {
+    var selected = $("select option:selected").text().split(".") || [];
     console.log(selected);
     verzija = months[parseInt(selected[1]) - 1] + selected[0].replace(/ /g, "");
     try {
       trazilicaData();
     } catch (error) {}
   });
-  $(".osoba").click(function() {
+  $(".osoba").click(function () {
     $(".smjena").prop("disabled", false);
     osoba = $(".osoba:checked").val() || [];
     try {
       trazilicaData();
     } catch (error) {}
   });
-  $(".smjena").click(function() {
+  $(".smjena").click(function () {
     $("#tags").prop("disabled", false);
     smjena = $(".smjena:checked").val() || [];
     trazilicaData();
   });
-  $("#tags").click(function() {
+  $("#tags").click(function () {
     $(".en").prop("disabled", false);
   });
-  $("#remember").click(function() {
-    input = $("#tags")
-      .val()
-      .toUpperCase();
+  $("#remember").click(function () {
+    input = $("#tags").val().toUpperCase();
     cookies();
     getRaspored();
   });
@@ -251,10 +248,10 @@ _____________________    _____   __________.___ .____     .___ _________     ___
       }
     }
     // filtriranje smeca i duplikata
-    $.each(arr, function(i, el) {
+    $.each(arr, function (i, el) {
       if ($.inArray(el, ACsrc) === -1) ACsrc.push(el);
     });
-    ACsrc = ACsrc.filter(function(word) {
+    ACsrc = ACsrc.filter(function (word) {
       return word.length < 4;
     });
     trazilicaInit();
@@ -277,11 +274,11 @@ _____________________    _____   __________.___ .____     .___ _________     ___
       }
     }
     var arr2 = [];
-    $.each(arr1, function(i, el) {
+    $.each(arr1, function (i, el) {
       arr2.push(arr1[i].replace(/ /g, "").replace(/-/g, ""));
     });
     var arr3 = [];
-    $.each(arr2, function(i, el) {
+    $.each(arr2, function (i, el) {
       if ($.inArray(el, arr3) === -1) {
         arr3.push(el);
         ACsrc.push(arr1[i].replace(/-/g, " "));
@@ -294,15 +291,15 @@ _____________________    _____   __________.___ .____     .___ _________     ___
   function trazilicaInit() {
     $("#tags").autocomplete({
       delay: 0,
-      source: function(req, responseFn) {
+      source: function (req, responseFn) {
         var re = $.ui.autocomplete.escapeRegex(req.term);
         var matcher = new RegExp("^" + re, "i");
-        var a = $.grep(ACsrc, function(item, index) {
+        var a = $.grep(ACsrc, function (item, index) {
           return matcher.test(item);
         });
         responseFn(a);
       },
-      minlength: 0
+      minlength: 0,
     });
   }
 
@@ -381,7 +378,7 @@ _____________________    _____   __________.___ .____     .___ _________     ___
   }
 
   function whiteTextForReadability() {
-    $("p.inline").each(function() {
+    $("p.inline").each(function () {
       var styles = $(this).css(["background-color", "color", "pattern"]);
       if (
         styles["background-color"] !== "rgba(0, 0, 0, 0)" &&
@@ -614,7 +611,7 @@ _____________________    _____   __________.___ .____     .___ _________     ___
     }
     $("#dezurni").html("<tbody>" + dezurni(data) + "</tbody>");
     $("#accordion").accordion({
-      active: n - 1 //Otvori tab koji je dan
+      active: n - 1, //Otvori tab koji je dan
     });
     whiteTextForReadability();
     //document.activeElement.blur(); // Fix za bug tipkovnice koja ostane otvorena na mobitelu
