@@ -82,7 +82,8 @@ const fs = require("fs"),
     "17.15-18.00",
     "18.05-18.50",
     "18.55-19.40",
-  ];
+  ],
+  dani = ["pon", "uto", "sri", "cet", "pet"];
 
 let filter = (data) => {
   for (let i = 1; i < data.length; i++) {
@@ -232,12 +233,22 @@ for (let i = 0; i < paths.length; i++) {
     if (typeof workbook["A" + ii] !== "undefined") {
       let profesor = [];
       profesor.push(workbook["A" + ii].v);
+
+      let danIndex = -1;
+      let prosliSat = 999;
+
       for (let iii = 0; iii < alphabet.length; iii++) {
         const slovo = alphabet[iii];
         const sat = workbook[slovo + "3"];
-        if (typeof sat === "undefined") break;
+        if (typeof sat === "undefined" || sat.v === "") break;
 
         let razred = workbook[alphabet[iii] + ii];
+
+        if (sat.v < prosliSat) {
+          danIndex++;
+        }
+        prosliSat = sat.v;
+
         if (typeof razred == "undefined" || razred.v === "") {
           // za prazne celije
           profesor.push("");
@@ -246,6 +257,7 @@ for (let i = 0; i < paths.length; i++) {
             name: razred.v,
             trajanje: trajanja[sat.v],
             sat: sat.v,
+            dan: dani[danIndex],
           };
 
           if (razred.s.fill) {

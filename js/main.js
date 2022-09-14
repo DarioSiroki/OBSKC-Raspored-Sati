@@ -209,7 +209,6 @@ _____________________    _____   __________.___ .____     .___ _________     ___
   // Modal input
   $("select").change(function () {
     var selected = $("select option:selected").text().split(".") || [];
-    console.log(selected);
     verzija = months[parseInt(selected[1]) - 1] + selected[0].replace(/ /g, "");
     try {
       trazilicaData();
@@ -395,39 +394,45 @@ _____________________    _____   __________.___ .____     .___ _________     ___
   // Profesor
   function getProfesor(data, dataL) {
     clearDOM();
-    var counter = -1;
-    // loop kroz profesore
-    for (i = 1; i < dataL; i++) {
+
+    const poDanu = { pon: [], uto: [], sri: [], cet: [], pet: [] };
+
+    data.forEach((profesor, j) => {
+      if (j === 0) return;
+
       if (
-        data[i][0]
+        profesor[0]
           .toUpperCase()
           .replace(/ /g, "")
           .indexOf(input.replace(/ /g, "")) !== -1
       ) {
-        // ako je prof pronadjen filtriraj
-        for (var param = 1; param < 36; param += 7) {
-          var text = "";
-          for (ii = param; ii < param + 7; ii++) {
-            text +=
-              "<tr><th>" +
-              (ii - param + 1) +
-              ".sat (" +
-              trajanje[ii - param] +
-              ")</th></tr><tr><td>" +
-              (typeof data[i][ii] === "object"
-                ? "<p class='inline' style='" +
-                  returnStyle(data[i][ii]) +
-                  "'>" +
-                  data[i][ii].name +
-                  "</p>"
-                : "") +
-              "</td></tr>";
+        for (let i = 1; i < profesor.length; i++) {
+          const sat = profesor[i];
+          if (typeof sat === "object" && sat.dan) {
+            poDanu[sat.dan].push(sat);
           }
-          counter++;
-          document.getElementById(daniID[counter]).innerHTML = text;
         }
       }
-    }
+    });
+
+    Object.keys(poDanu).forEach((dan) => {
+      const sati = poDanu[dan];
+      let text = "";
+
+      sati.forEach((celija) => {
+        text += `
+          <th>${celija.sat}.sat (${celija.trajanje})</th>
+        </tr>
+        <tr>
+          <td>
+            <p class='inline' style='${returnStyle(celija)}'>${celija.name}</p>
+          </td>
+        </tr>`;
+      });
+
+      document.getElementById(dan).innerHTML = text;
+    });
+
     finalTouch(data[0]);
   }
 
@@ -439,51 +444,73 @@ _____________________    _____   __________.___ .____     .___ _________     ___
       data[1] = data[0];
       data[0] = swArr;
     }
-    var counter = -1;
-    for (var param = 1; param < 36; param += 7) {
-      var text = "";
-      var counter2 = 0;
-      for (var i = 0; i < data.length; i++) {
-        for (var ii = 1; ii < data[i].length; ii++) {
-          if (
-            data[i][ii][0]
-              .toUpperCase()
-              .replace(/ /g, "")
-              .indexOf(input.replace(/ /g, "")) !== -1
-          ) {
-            text +=
-              counter2 === 0
-                ? "<tr><th>PRIJEPODNE</th></tr>"
-                : "<tr><th>POSLIJEPODNE</th></tr>";
-            for (var iii = param; iii < param + 7; iii++) {
-              if (typeof data[i][ii][iii] === "object") {
-                text +=
-                  "<tr><th>" +
-                  (iii - param + 1) +
-                  ".sat (" +
-                  (counter2 === 0
-                    ? trajanjeU[iii - param]
-                    : trajanjeP[iii - param]) +
-                  ")</th></tr><tr><td>" +
-                  (typeof data[i][ii][iii] === "object"
-                    ? "<p class='inline' style='" +
-                      returnStyle(data[i][ii][iii]) +
-                      "'>" +
-                      data[i][ii][iii].name +
-                      "</p>"
-                    : "") +
-                  "</td></tr>";
+
+    // prijepodne
+    const poDanuA = { pon: [], uto: [], sri: [], cet: [], pet: [] };
+    // poslijepodne
+    const poDanuB = { pon: [], uto: [], sri: [], cet: [], pet: [] };
+
+    data.forEach((smjena) => {
+      const jePrijePodnevna = smjena[0].prijeposlije === "PRIJE";
+      smjena.forEach((profesor, j) => {
+        if (j === 0) return;
+
+        if (
+          profesor[0]
+            .toUpperCase()
+            .replace(/ /g, "")
+            .indexOf(input.replace(/ /g, "")) !== -1
+        ) {
+          for (let i = 1; i < profesor.length; i++) {
+            const sat = profesor[i];
+            if (typeof sat === "object" && sat.dan) {
+              if (jePrijePodnevna) {
+                poDanuA[sat.dan].push(sat);
               } else {
-                text += "";
+                poDanuB[sat.dan].push(sat);
               }
             }
           }
         }
-        counter2++;
+      });
+    });
+
+    Object.keys(poDanuA).forEach((dan) => {
+      const prije = poDanuA[dan];
+      const poslije = poDanuB[dan];
+      let text = "";
+
+      if (prije.length > 0) {
+        text += "<tr><th>PRIJEPODNE</th></tr><tr>";
+        prije.forEach((celija) => {
+          text += `
+          <th>${celija.sat}.sat (${celija.trajanje})</th>
+        </tr>
+        <tr>
+          <td>
+            <p class='inline' style='${returnStyle(celija)}'>${celija.name}</p>
+          </td>
+        </tr>`;
+        });
       }
-      counter++;
-      document.getElementById(daniID[counter]).innerHTML = text;
-    }
+
+      if (poslije.length > 0) {
+        text += "<tr><th>POSLIJEPODNE</th></tr><tr>";
+        poslije.forEach((celija) => {
+          text += `
+          <th>${celija.sat}.sat (${celija.trajanje})</th>
+        </tr>
+        <tr>
+          <td>
+            <p class='inline' style='${returnStyle(celija)}'>${celija.name}</p>
+          </td>
+        </tr>`;
+        });
+      }
+
+      document.getElementById(dan).innerHTML = text;
+    });
+
     finalTouch({ A: data[0][0], B: data[1][0] });
   }
 
