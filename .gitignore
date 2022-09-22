@@ -1,4 +1,9 @@
 converter/node_modules
-app
-converter/log.txt
-**/.DS_Store
+.DS_Store
+keystore.jks
+
+# cordova
+platforms
+www
+node_modules
+package-lock.json
